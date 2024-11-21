@@ -13,6 +13,7 @@ if ($_SESSION['role'] !== 'admin') {
 <body>
     <h1>Welcome, Admin!</h1>
     <button id="generate-pdf">Download Report</button>
+    <a href="resident.php">Resident</a>
     <a href="../logout.php">Logout</a>
     <script src="../assets/pdf/jspdf.min.js"></script>
     <script>
