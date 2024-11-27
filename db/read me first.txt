@@ -1,0 +1,9 @@
+1. adto sa http://localhost/phpmyadmin
+2. import dbsql.sql ron mo create ug database ug tables
+3. import db_bmis_bulwa.sql aron naa nay sample data ug user, aron maka login
+4. admin account - username: admin password: admin123
+5. user account - username: user password: user123
+
+tapos try ug explore add ,edit ug delete aron ma check nato kung unsay bugs
+
+salamat
