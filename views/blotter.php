@@ -27,7 +27,6 @@ include("../includes/navbar.php");
                     <th>Complainant Name</th>
                     <th>Respondent Name</th>
                     <th>Blotter Type</th>
-                    <th>Suffix Name</th>
                     <th>Status</th>
                     <th>Date</th>
                     <th style="width:142px;">Actions</th>
@@ -168,5 +167,6 @@ include("../includes/navbar.php");
 <?php
 
 include("../includes/footer.php");
+
 
 ?>
