@@ -24,7 +24,8 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     return `
                         <button class="info-btn btn btn-primary btn-sm" 
-                            data-id="${row.id}">
+                            data-id="${row.id}"
+                            onclick="window.open('view_resident.php?id=' + ${(row.id)},'_blank')" >
                             View
                         </button>
                         <button class="edit-btn btn btn-warning btn-sm" 
@@ -79,10 +80,6 @@ $(document).ready(function () {
 
     // Open modal and populate fields for editing
     $(document).on('click', '.edit-btn', function () {
-        // const id = $(this).data('id');
-        // const name = $(this).data('name');
-        // const email = $(this).data('email');
-        // const age = $(this).data('age');
         const id = $(this).data('id');
         const fname = $(this).data('fname');
         const mname = $(this).data('mname');
@@ -112,10 +109,6 @@ $(document).ready(function () {
 
 
         // Populate modal fields
-        // $('#editId').val(id);
-        // $('#name').val(name);
-        // $('#email').val(email);
-        // $('#age').val(age);
         $('#editId').val(id);
         $('#fname').val(fname);
         $('#mname').val(mname);
@@ -142,7 +135,7 @@ $(document).ready(function () {
         $('#emergency_contact_person').val(emergency_contact_person);
         $('#emergency_contact_relationship').val(emergency_contact_relationship);
         $('#emergency_contact_number').val(emergency_contact_number);
-
+    
         // Change modal title and button text
         $('#residentModalLabel').text('Edit Resident');
         $('#btn_addUpdate').text('Update');
@@ -200,7 +193,7 @@ $(document).ready(function () {
                 $('#residentModal').modal('hide');
                 table.ajax.reload(); // Reload table
                 $('#addResidentForm')[0].reset();
-                console.log(result.message); //
+                console.log(dob); //
             }else{
                 alert(result.message); //
             }

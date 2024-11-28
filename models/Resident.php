@@ -107,5 +107,14 @@ class Resident {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+    public function individual($id) {
+        $query = "SELECT * FROM tbl_resident WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Bind the id parameter to the query
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Use fetch() instead of fetchAll()
+    }
+    
 }
 ?>

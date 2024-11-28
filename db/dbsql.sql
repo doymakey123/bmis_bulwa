@@ -41,3 +41,25 @@ CREATE TABLE tbl_resident (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+CREATE TABLE tbl_blotter (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    complainant_fname VARCHAR(100) NOT NULL,
+    complainant_mname VARCHAR(100),
+    complainant_lname VARCHAR(100) NOT NULL,
+    complainant_suffix VARCHAR(10),
+    complainant_address VARCHAR(200) NOT NULL,
+     complainant_contact VARCHAR(11) NOT NULL,
+    respondent_fname VARCHAR(100) NOT NULL,
+    respondent_mname VARCHAR(100),
+    respondent_lname VARCHAR(100) NOT NULL,
+    respondent_suffix VARCHAR(10),
+    respondent_contact VARCHAR(11),
+    blotter_type VARCHAR(50) NOT NULL,
+    details TEXT NOT NULL,
+    status VARCHAR(15) NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

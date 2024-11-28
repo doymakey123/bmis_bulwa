@@ -18,6 +18,20 @@ include("../includes/navbar.php");
 
         <!-- Modal Trigger -->
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#residentModal">Add Resident</button>
+
+        <!-- Filter Dropdown -->
+        <div>
+            <label for="filter-purok">Filter by Purok:</label>
+            <select id="filter-purok" name="purok">
+                <option value="">All</option>
+                <option value="1">Purok 1</option>
+                <option value="2">Purok 2</option>
+                <option value="3">Purok 3</option>
+                <option value="4">Purok 4</option>
+                <!-- Add more Puroks dynamically if needed -->
+            </select>
+        </div>
+
         <table class="table table-bordered" id="residentTable" style="width: 100%">
             <thead>
                 <tr>
@@ -35,6 +49,7 @@ include("../includes/navbar.php");
             </thead>
             <tbody></tbody>
         </table>
+
     </div>
 
 
