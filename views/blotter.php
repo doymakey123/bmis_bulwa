@@ -50,7 +50,7 @@ include("../includes/navbar.php");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="editId">
+                    <input type="text" id="editIdBlotter">
 
                     <div class="row">
                         <div class="col-md-4"> </div>
@@ -84,12 +84,26 @@ include("../includes/navbar.php");
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="complainant_suffix">Suffix Name</label>
-                                <input type="text" class="form-control" id="scomplainant_uffix" name="complainant_suffix" style="text-transform: capitalize;">
+                                <input type="text" class="form-control" id="complainant_suffix" name="complainant_suffix" style="text-transform: capitalize;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="complainant_address">Address</label>
+                                <input type="text" class="form-control" id="complainant_address" name="complainant_address" style="text-transform: capitalize;" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="complainant_contact">Mobile Number</label>
+                                <input type="text" class="form-control" id="complainant_contact" name="complainant_contact" style="text-transform: capitalize;" required>
                             </div>
                         </div>
                     </div>
 
-                    <br><br>
+                    <br>
 
                     <div class="row">
                         <div class="col-md-4"> </div>
@@ -129,7 +143,13 @@ include("../includes/navbar.php");
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="respondent_contact">Mobile Number</label>
+                                <input type="text" class="form-control" id="respondent_contact" name="respondent_contact" style="text-transform: capitalize;">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="blotter_type">Blotter Type</label>
                                 <select class="custom-select" id="blotter_type" name="blotter_type" required>
@@ -139,10 +159,20 @@ include("../includes/navbar.php");
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="details">Description</label>
-                                <textarea class="form-control" name="details" id="details" rows="5" cols="50" required></textarea>
+                                <textarea class="form-control" name="details" id="details" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="status">Description</label>
+                                <select class="custom-select" id="status" name="status" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Settled">Settled</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -164,6 +194,7 @@ include("../includes/navbar.php");
 
 
 
+<script src="../assets/js/blotter_script.js"></script>
 <?php
 
 include("../includes/footer.php");
