@@ -1,10 +1,15 @@
 <?php
 require_once '../includes/db.php';
 require_once '../models/Resident.php';
+require_once '../models/Activitylog.php';
+
+session_start();
 
 $database = new Database();
 $db = $database->connect();
 $resident = new Resident($db);
+$userActivityLog = new Activitylog($db);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fname = ucfirst(htmlspecialchars(strip_tags($_POST['fname'])));
@@ -29,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $blood_type = htmlspecialchars(strip_tags($_POST['blood_type']));
     $disabilities = ucfirst(htmlspecialchars(strip_tags($_POST['disabilities'])));
     $beneficiary_status = ucfirst(htmlspecialchars(strip_tags($_POST['beneficiary_status'])));
+    $precinct_number = htmlspecialchars(strip_tags($_POST['precinct_number']));
+    $voter_status = htmlspecialchars(strip_tags($_POST['voter_status']));
     $emergency_contact_person = ucfirst(htmlspecialchars(strip_tags($_POST['emergency_contact_person'])));
     $emergency_contact_relationship = ucfirst(htmlspecialchars(strip_tags($_POST['emergency_contact_relationship'])));
     $emergency_contact_number = htmlspecialchars(strip_tags($_POST['emergency_contact_number']));
@@ -49,12 +56,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'success' => false,
             'message' => 'Resident data already exists in the database.'
         ]);
+
+            // Validate session variables before logging activity
+            if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
+                $descriptionLog = $fname . ' ' . $mname . ' ' . $lname . ' ' . $suffix . 'resident data already exist';
+                $userActivityLog->create($_SESSION['id'], $_SESSION['role'], 'Add', $descriptionLog);
+            } else {
+                // Handle missing session variables
+                error_log('Activity log error: Missing session variables for user ID or role.');
+            }
+
+
     } else {
         // Add new resident
-        if ($resident->create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number)) {
+        if ($resident->create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number)) {
             echo json_encode(['success' => true, 'message' => 'Resident added successfully']);
+
+            // Validate session variables before logging activity
+            if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
+                $descriptionLog = $fname . ' ' . $mname . ' ' . $lname . ' ' . $suffix . 'resident added successfully';
+                $userActivityLog->create($_SESSION['id'], $_SESSION['role'], 'Add', $descriptionLog);
+            } else {
+                // Handle missing session variables
+                error_log('Activity log error: Missing session variables for user ID or role.');
+            }
+
         } else {
             echo json_encode(['success' => false, 'message' => 'Failed to add resident']);
+
+            // Validate session variables before logging activity
+            if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
+                $descriptionLog = $fname . ' ' . $mname . ' ' . $lname . ' ' . $suffix . ' failed to add resident';
+                $userActivityLog->create($_SESSION['id'], $_SESSION['role'], 'Add ', $descriptionLog);
+            } else {
+                // Handle missing session variables
+                error_log('Activity log error: Missing session variables for user ID or role.');
+            }
         }
     }
 

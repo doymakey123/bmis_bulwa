@@ -2,10 +2,13 @@
 session_start();
 require_once '../includes/db.php';
 require_once '../models/User.php';
+require_once '../models/Activitylog.php';
+
 
 $database = new Database();
 $db = $database->connect();
 $user = new User($db);
+$userActivityLog = new Activitylog($db);
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,14 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loggedInUser = $user->login($username, $password);
 
     if ($loggedInUser) {
+
         $_SESSION['username'] = $loggedInUser['username'];
         $_SESSION['role'] = $loggedInUser['role'];
+        $_SESSION['id'] = $loggedInUser['id'];
+
+        $userActivityLog = $userActivityLog->create($_SESSION['id'], $_SESSION['role'], 'login', 'succesfully');
+
 
         // Redirect based on role
         header('Location: ../views/' . $loggedInUser['role'] . '.php');
         exit;
     } else {
         $error = 'Invalid username or password!';
+        $userActivityLog = $userActivityLog->create('0', $username, 'login', 'failed');
     }
 }
 ?>

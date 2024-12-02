@@ -241,6 +241,23 @@ include("../includes/navbar.php");
                                 <input type="text" class="form-control" id="beneficiary_status" name="beneficiary_status" style="text-transform: capitalize;" required>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="precinct_number">Precinct Number</label>
+                                <input type="text" class="form-control" id="precinct_number" name="precinct_number" style="text-transform: capitalize;" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="voter_status">Voter Status</label>
+                                <select class="custom-select" id="voter_status" name="voter_status" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Not Active">Not Active</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
                         <!-- <div class="col-md-4">
                         </div> -->
                     </div>

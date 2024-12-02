@@ -11,6 +11,7 @@
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-file-alt"></i><span>Barangay Clearance</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="blotter.php"><i class="far fa-folder"></i><span>Blotter Record</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-folder"></i><span>Records</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="far fa-folder"></i><span>Activity Log</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

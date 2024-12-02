@@ -18,7 +18,7 @@ class Resident {
         return $stmt->fetchColumn() > 0; // Returns true if the resident exists
     }
 
-    public function create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
+    public function create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
         
         // Check if resident already exists
         if ($this->exists($fname, $mname, $lname, $suffix)) {
@@ -26,7 +26,7 @@ class Resident {
         }
 
 
-        $query = "INSERT INTO tbl_resident (fname, mname, lname, suffix, gender, dob, civil_status, nationality, religion, mobile, email, house_number, purok, brgy, head_of_family, household_composition, educational_attainment, occupation, type_of_residency, blood_type, disabilities, beneficiary_status, emergency_contact_person, emergency_contact_relationship, emergency_contact_number) VALUES (:fname, :mname, :lname, :suffix, :gender, :dob, :civil_status, :nationality, :religion, :mobile, :email, :house_number, :purok, :brgy, :head_of_family, :household_composition, :educational_attainment, :occupation, :type_of_residency, :blood_type, :disabilities, :beneficiary_status, :emergency_contact_person, :emergency_contact_relationship, :emergency_contact_number)";
+        $query = "INSERT INTO tbl_resident (fname, mname, lname, suffix, gender, dob, civil_status, nationality, religion, mobile, email, house_number, purok, brgy, head_of_family, household_composition, educational_attainment, occupation, type_of_residency, blood_type, disabilities, beneficiary_status, precinct_number, voter_status, emergency_contact_person, emergency_contact_relationship, emergency_contact_number) VALUES (:fname, :mname, :lname, :suffix, :gender, :dob, :civil_status, :nationality, :religion, :mobile, :email, :house_number, :purok, :brgy, :head_of_family, :household_composition, :educational_attainment, :occupation, :type_of_residency, :blood_type, :disabilities, :beneficiary_status, :precinct_number, :voter_status, :emergency_contact_person, :emergency_contact_relationship, :emergency_contact_number)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':fname', $fname);
         $stmt->bindParam(':mname', $mname);
@@ -50,6 +50,8 @@ class Resident {
         $stmt->bindParam(':blood_type', $blood_type);
         $stmt->bindParam(':disabilities', $disabilities);
         $stmt->bindParam(':beneficiary_status', $beneficiary_status);
+        $stmt->bindParam(':precinct_number', $precinct_number);
+        $stmt->bindParam(':voter_status', $voter_status);
         $stmt->bindParam(':emergency_contact_person', $emergency_contact_person);
         $stmt->bindParam(':emergency_contact_relationship', $emergency_contact_relationship);
         $stmt->bindParam(':emergency_contact_number', $emergency_contact_number);
@@ -68,9 +70,9 @@ class Resident {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
+    public function update($id, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
         //$query = "UPDATE tbl_resident SET name = :name, email = :email, age = :age WHERE id = :id";
-        $query = "UPDATE tbl_resident SET fname = :fname, mname = :mname, lname = :lname, suffix = :suffix, gender = :gender, dob = :dob, civil_status = :civil_status, nationality = :nationality, religion = :religion, mobile = :mobile, email = :email, house_number = :house_number, purok = :purok, brgy = :brgy, head_of_family = :head_of_family, household_composition = :household_composition, educational_attainment = :educational_attainment, occupation = :occupation, type_of_residency = :type_of_residency, blood_type = :blood_type, disabilities = :disabilities, beneficiary_status = :beneficiary_status, emergency_contact_person = :emergency_contact_person, emergency_contact_relationship = :emergency_contact_relationship, emergency_contact_number = :emergency_contact_number WHERE id = :id";
+        $query = "UPDATE tbl_resident SET fname = :fname, mname = :mname, lname = :lname, suffix = :suffix, gender = :gender, dob = :dob, civil_status = :civil_status, nationality = :nationality, religion = :religion, mobile = :mobile, email = :email, house_number = :house_number, purok = :purok, brgy = :brgy, head_of_family = :head_of_family, household_composition = :household_composition, educational_attainment = :educational_attainment, occupation = :occupation, type_of_residency = :type_of_residency, blood_type = :blood_type, disabilities = :disabilities, beneficiary_status = :beneficiary_status, precinct_number = :precinct_number, voter_status = :voter_status, emergency_contact_person = :emergency_contact_person, emergency_contact_relationship = :emergency_contact_relationship, emergency_contact_number = :emergency_contact_number WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':fname', $fname);
@@ -95,6 +97,8 @@ class Resident {
         $stmt->bindParam(':blood_type', $blood_type);
         $stmt->bindParam(':disabilities', $disabilities);
         $stmt->bindParam(':beneficiary_status', $beneficiary_status);
+        $stmt->bindParam(':precinct_number', $precinct_number);
+        $stmt->bindParam(':voter_status', $voter_status);
         $stmt->bindParam(':emergency_contact_person', $emergency_contact_person);
         $stmt->bindParam(':emergency_contact_relationship', $emergency_contact_relationship);
         $stmt->bindParam(':emergency_contact_number', $emergency_contact_number);

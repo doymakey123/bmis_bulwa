@@ -52,6 +52,8 @@ $(document).ready(function () {
                             data-blood_type="${row.blood_type}" 
                             data-disabilities="${row.disabilities}" 
                             data-beneficiary_status="${row.beneficiary_status}" 
+                            data-precinct_number="${row.precinct_number}" 
+                            data-voter_status="${row.voter_status}" 
                             data-emergency_contact_person="${row.emergency_contact_person}" 
                             data-emergency_contact_relationship="${row.emergency_contact_relationship}" 
                             data-emergency_contact_number="${row.emergency_contact_number}" 
@@ -60,7 +62,11 @@ $(document).ready(function () {
                             Edit
                         </button>
                         <button class="delete-btn btn btn-danger btn-sm" 
-                            data-id="${row.id}">
+                            data-id="${row.id}"
+                            data-fnamed="${row.fname}" 
+                            data-mnamed="${row.mname}" 
+                            data-lnamed="${row.lname}" 
+                            data-suffixd="${row.suffix}" >
                             Delete
                         </button>
                     `;
@@ -103,6 +109,8 @@ $(document).ready(function () {
         const blood_type = $(this).data('blood_type');
         const disabilities = $(this).data('disabilities');
         const beneficiary_status = $(this).data('beneficiary_status');
+        const precinct_number = $(this).data('precinct_number');
+        const voter_status = $(this).data('voter_status');
         const emergency_contact_person = $(this).data('emergency_contact_person');
         const emergency_contact_relationship = $(this).data('emergency_contact_relationship');
         const emergency_contact_number = $(this).data('emergency_contact_number');
@@ -132,6 +140,8 @@ $(document).ready(function () {
         $('#blood_type').val(blood_type);
         $('#disabilities').val(disabilities);
         $('#beneficiary_status').val(beneficiary_status);
+        $('#precinct_number').val(precinct_number);
+        $('#voter_status').val(voter_status);
         $('#emergency_contact_person').val(emergency_contact_person);
         $('#emergency_contact_relationship').val(emergency_contact_relationship);
         $('#emergency_contact_number').val(emergency_contact_number);
@@ -178,6 +188,8 @@ $(document).ready(function () {
             blood_type: $('#blood_type').val(),
             disabilities: $('#disabilities').val(),
             beneficiary_status: $('#beneficiary_status').val(),
+            precinct_number: $('#precinct_number').val(),
+            voter_status: $('#voter_status').val(),
             emergency_contact_person: $('#emergency_contact_person').val(),
             emergency_contact_relationship: $('#emergency_contact_relationship').val(),
             emergency_contact_number: $('#emergency_contact_number').val(),
@@ -211,7 +223,7 @@ $(document).ready(function () {
 
                 if (result.success) {
                     table.ajax.reload();
-                    console.log('deleted'); //
+                    //console.log(fnamed); //
                 }
             });
         }
