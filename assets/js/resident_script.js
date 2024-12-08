@@ -3,21 +3,30 @@
 
 $(document).ready(function () {
     // Initialize DataTable
+    var counter = 0;
     const table = $('#residentTable').DataTable({
         ajax: {
             url: '../ajax/fetch_resident.php', // Backend URL to fetch data
             dataSrc: '',
         },
         columns: [
-            { data: 'id' },
-            { data: 'fname' },
-            { data: 'mname' },
-            { data: 'lname' },
-            { data: 'suffix' },
+            { data: 
+                function(){
+                    counter++;
+                    return counter;
+                }
+            },
+            { data: 'household_number' },
+            { data: null,
+                render: function(data, type, row) {
+                    return (row.fname ? row.fname + ' ' : '') + (row.mname ? row.mname + ' ' : '') + (row.lname ? row.lname + ' ' : '') + (row.suffix ? row.suffix : '')
+                }
+            },
             { data: 'age' },
-            { data: 'dob' },
+            { data: 'formatted_birthday' },
             { data: 'purok' },
-            { data: 'occupation' },
+            { data: 'voter_status' },
+            { data: 'employment_status' },
             {
                 
                 data: null,
@@ -29,44 +38,48 @@ $(document).ready(function () {
                             View
                         </button>
                         <button class="edit-btn btn btn-warning btn-sm" 
-                            data-id="${row.id}" 
+                            data-id="${row.id}"
+                            data-household_number="${row.household_number}" 
                             data-fname="${row.fname}" 
                             data-mname="${row.mname}" 
                             data-lname="${row.lname}" 
-                            data-suffix="${row.suffix}" 
-                            data-gender="${row.gender}"
-                            data-dob="${row.dob}" 
+                            data-suffix="${row.suffix}"
+                            data-gender="${row.gender}" 
+                            data-dob="${row.formatted_birthday}" 
                             data-civil_status="${row.civil_status}" 
-                            data-nationality="${row.nationality}" 
+                            data-nationality="${row.nationality}"
                             data-religion="${row.religion}" 
+                            data-purok="${row.purok}" 
+                            data-address="${row.address}" 
                             data-mobile="${row.mobile}" 
                             data-email="${row.email}" 
-                            data-house_number="${row.house_number}" 
-                            data-purok="${row.purok}" 
-                            data-brgy="${row.brgy}" 
-                            data-head_of_family="${row.head_of_family}" 
-                            data-household_composition="${row.household_composition}" 
-                            data-educational_attainment="${row.educational_attainment}" 
-                            data-occupation="${row.occupation}" 
-                            data-type_of_residency="${row.type_of_residency}" 
-                            data-blood_type="${row.blood_type}" 
-                            data-disabilities="${row.disabilities}" 
-                            data-beneficiary_status="${row.beneficiary_status}" 
-                            data-precinct_number="${row.precinct_number}" 
                             data-voter_status="${row.voter_status}" 
+                            data-precinct_number="${row.precinct_number}"
+                            data-philhealth_number="${row.philhealth_number}" 
+                            data-sss_gsis_number="${row.sss_gsis_number}" 
+                            data-tin_number="${row.tin_number}" 
+                            data-educational_attainment="${row.educational_attainment}"
+                            data-employment_status="${row.employment_status}" 
+                            data-occupation="${row.occupation}" 
+                            data-monthly_annual_income="${row.monthly_annual_income}" 
+                            data-pwd_status="${row.pwd_status}"
+                            data-solo_parent_status="${row.solo_parent_status}" 
+                            data-relationship_household_head="${row.relationship_household_head}" 
+                            data-head_of_the_family="${row.head_of_the_family}" 
+                            data-type_of_dwelling="${row.type_of_dwelling}"
+                             data-health_condition="${row.health_condition}" 
+                            data-vaccination_status="${row.vaccination_status}" 
+                            data-blood_type="${row.blood_type}" 
+                             data-beneficiary_program="${row.beneficiary_program}" 
                             data-emergency_contact_person="${row.emergency_contact_person}" 
                             data-emergency_contact_relationship="${row.emergency_contact_relationship}" 
-                            data-emergency_contact_number="${row.emergency_contact_number}" 
+                            data-emergency_contact_number="${row.emergency_contact_number}"
                             data-toggle="modal" 
                             data-target="#residentModal">
                             Edit
                         </button>
                         <button class="delete-btn btn btn-danger btn-sm" 
-                            data-id="${row.id}"
-                            data-fnamed="${row.fname}" 
-                            data-mnamed="${row.mname}" 
-                            data-lnamed="${row.lname}" 
-                            data-suffixd="${row.suffix}" >
+                            data-id="${row.id}">
                             Delete
                         </button>
                     `;
@@ -87,6 +100,7 @@ $(document).ready(function () {
     // Open modal and populate fields for editing
     $(document).on('click', '.edit-btn', function () {
         const id = $(this).data('id');
+        const household_number = $(this).data('household_number');
         const fname = $(this).data('fname');
         const mname = $(this).data('mname');
         const lname = $(this).data('lname');
@@ -96,21 +110,28 @@ $(document).ready(function () {
         const civil_status = $(this).data('civil_status');
         const nationality = $(this).data('nationality');
         const religion = $(this).data('religion');
+        const purok = $(this).data('purok');
+        const address = $(this).data('address');
         const mobile = $(this).data('mobile');
         const email = $(this).data('email');
-        const house_number = $(this).data('house_number');
-        const purok = $(this).data('purok');
-        const brgy = $(this).data('brgy');
-        const head_of_family = $(this).data('head_of_family');
-        const household_composition = $(this).data('household_composition');
-        const educational_attainment = $(this).data('educational_attainment');
-        const occupation = $(this).data('occupation');
-        const type_of_residency = $(this).data('type_of_residency');
-        const blood_type = $(this).data('blood_type');
-        const disabilities = $(this).data('disabilities');
-        const beneficiary_status = $(this).data('beneficiary_status');
-        const precinct_number = $(this).data('precinct_number');
         const voter_status = $(this).data('voter_status');
+        const precinct_number = $(this).data('precinct_number');
+        const philhealth_number = $(this).data('philhealth_number');
+        const sss_gsis_number = $(this).data('sss_gsis_number');
+        const tin_number = $(this).data('tin_number');
+        const educational_attainment = $(this).data('educational_attainment');
+        const employment_status = $(this).data('employment_status');
+        const occupation = $(this).data('occupation');
+        const monthly_annual_income = $(this).data('monthly_annual_income');
+        const pwd_status = $(this).data('pwd_status');
+        const solo_parent_status = $(this).data('solo_parent_status');
+        const relationship_household_head = $(this).data('relationship_household_head');
+        const head_of_the_family = $(this).data('head_of_the_family');
+        const type_of_dwelling = $(this).data('type_of_dwelling');
+        const health_condition = $(this).data('health_condition');
+        const vaccination_status = $(this).data('vaccination_status');
+        const blood_type = $(this).data('blood_type');
+        const beneficiary_program = $(this).data('beneficiary_program');
         const emergency_contact_person = $(this).data('emergency_contact_person');
         const emergency_contact_relationship = $(this).data('emergency_contact_relationship');
         const emergency_contact_number = $(this).data('emergency_contact_number');
@@ -118,6 +139,7 @@ $(document).ready(function () {
 
         // Populate modal fields
         $('#editId').val(id);
+        $('#household_number').val(household_number);
         $('#fname').val(fname);
         $('#mname').val(mname);
         $('#lname').val(lname);
@@ -127,28 +149,55 @@ $(document).ready(function () {
         $('#civil_status').val(civil_status);
         $('#nationality').val(nationality);
         $('#religion').val(religion);
+        $('#purok').val(purok);
+        $('#address').val(address);
         $('#mobile').val(mobile);
         $('#email').val(email);
-        $('#house_number').val(house_number);
-        $('#purok').val(purok);
-        $('#brgy').val(brgy);
-        $('#head_of_family').val(head_of_family);
-        $('#household_composition').val(household_composition);
-        $('#educational_attainment').val(educational_attainment);
-        $('#occupation').val(occupation);
-        $('#type_of_residency').val(type_of_residency);
-        $('#blood_type').val(blood_type);
-        $('#disabilities').val(disabilities);
-        $('#beneficiary_status').val(beneficiary_status);
-        $('#precinct_number').val(precinct_number);
         $('#voter_status').val(voter_status);
+        $('#precinct_number').val(precinct_number);
+        $('#philhealth_number').val(philhealth_number);
+        $('#sss_gsis_number').val(sss_gsis_number);
+        $('#tin_number').val(tin_number);
+        $('#educational_attainment').val(educational_attainment);
+        $('#employment_status').val(employment_status);
+        $('#occupation').val(occupation);
+        $('#monthly_annual_income').val(monthly_annual_income);
+        $('#pwd_status').val(pwd_status);
+        $('#solo_parent_status').val(solo_parent_status);
+        $('#relationship_household_head').val(relationship_household_head);
+        $('#head_of_the_family').val(head_of_the_family);
+        $('#type_of_dwelling').val(type_of_dwelling);
+        $('#health_condition').val(health_condition);
+        $('#vaccination_status').val(vaccination_status);
+        $('#blood_type').val(blood_type);
+        $('#beneficiary_program').val(beneficiary_program);
         $('#emergency_contact_person').val(emergency_contact_person);
         $('#emergency_contact_relationship').val(emergency_contact_relationship);
         $('#emergency_contact_number').val(emergency_contact_number);
-    
         // Change modal title and button text
         $('#residentModalLabel').text('Edit Resident');
         $('#btn_addUpdate').text('Update');
+
+        if ($('#voter_status').val() === 'Registered') {
+            $('#div_precinct_number').show();
+        }else{
+            $('#div_precinct_number').hide();
+        }
+
+        if ($('#employment_status').val() === 'Employed') {
+            $('#div_occupation').show();
+        }else{
+            $('#occupation').val = ('');
+            $('#div_occupation').hide();
+        }
+
+        if ($('#relationship_household_head').val() != 'Head') {
+            $('#div_head_of_the_family').show();
+        }else{
+            $('#div_head_of_the_family').hide();
+        }
+
+
     });
 
     // Reset modal when closing
@@ -166,6 +215,7 @@ $(document).ready(function () {
         const id = $('#editId').val();
         const formData = {
             id: id || null,
+            household_number: $('#household_number').val(),
             fname: $('#fname').val(),
             mname: $('#mname').val(),
             lname: $('#lname').val(),
@@ -175,21 +225,28 @@ $(document).ready(function () {
             civil_status: $('#civil_status').val(),
             nationality: $('#nationality').val(),
             religion: $('#religion').val(),
+            purok: $('#purok').val(),
+            address: $('#address').val(),
             mobile: $('#mobile').val(),
             email: $('#email').val(),
-            house_number: $('#house_number').val(),
-            purok: $('#purok').val(),
-            brgy: $('#brgy').val(),
-            head_of_family: $('#head_of_family').val(),
-            household_composition: $('#household_composition').val(),
-            educational_attainment: $('#educational_attainment').val(),
-            occupation: $('#occupation').val(),
-            type_of_residency: $('#type_of_residency').val(),
-            blood_type: $('#blood_type').val(),
-            disabilities: $('#disabilities').val(),
-            beneficiary_status: $('#beneficiary_status').val(),
-            precinct_number: $('#precinct_number').val(),
             voter_status: $('#voter_status').val(),
+            precinct_number: $('#precinct_number').val(),
+            philhealth_number: $('#philhealth_number').val(),
+            sss_gsis_number: $('#sss_gsis_number').val(),
+            tin_number: $('#tin_number').val(),
+            educational_attainment: $('#educational_attainment').val(),
+            employment_status: $('#employment_status').val(),
+            occupation: $('#occupation').val(),
+            monthly_annual_income: $('#monthly_annual_income').val(),
+            pwd_status: $('#pwd_status').val(),
+            solo_parent_status: $('#solo_parent_status').val(),
+            relationship_household_head: $('#relationship_household_head').val(),
+            head_of_the_family: $('#head_of_the_family').val(),
+            type_of_dwelling: $('#type_of_dwelling').val(),
+            health_condition: $('#health_condition').val(),
+            vaccination_status: $('#vaccination_status').val(),
+            blood_type: $('#blood_type').val(),
+            beneficiary_program: $('#beneficiary_program').val(),
             emergency_contact_person: $('#emergency_contact_person').val(),
             emergency_contact_relationship: $('#emergency_contact_relationship').val(),
             emergency_contact_number: $('#emergency_contact_number').val(),

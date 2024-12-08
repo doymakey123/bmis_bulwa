@@ -18,7 +18,7 @@ class Resident {
         return $stmt->fetchColumn() > 0; // Returns true if the resident exists
     }
 
-    public function create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
+    public function create($household_number, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $purok, $address, $mobile, $email, $voter_status, $precinct_number, $philhealth_number, $sss_gsis_number, $tin_number, $educational_attainment, $employment_status, $occupation, $monthly_annual_income, $pwd_status, $solo_parent_status, $relationship_household_head, $head_of_the_family, $type_of_dwelling, $health_condition, $vaccination_status, $blood_type, $beneficiary_program, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
         
         // Check if resident already exists
         if ($this->exists($fname, $mname, $lname, $suffix)) {
@@ -26,8 +26,9 @@ class Resident {
         }
 
 
-        $query = "INSERT INTO tbl_resident (fname, mname, lname, suffix, gender, dob, civil_status, nationality, religion, mobile, email, house_number, purok, brgy, head_of_family, household_composition, educational_attainment, occupation, type_of_residency, blood_type, disabilities, beneficiary_status, precinct_number, voter_status, emergency_contact_person, emergency_contact_relationship, emergency_contact_number) VALUES (:fname, :mname, :lname, :suffix, :gender, :dob, :civil_status, :nationality, :religion, :mobile, :email, :house_number, :purok, :brgy, :head_of_family, :household_composition, :educational_attainment, :occupation, :type_of_residency, :blood_type, :disabilities, :beneficiary_status, :precinct_number, :voter_status, :emergency_contact_person, :emergency_contact_relationship, :emergency_contact_number)";
+        $query = "INSERT INTO tbl_resident (household_number, fname, mname, lname, suffix, gender, dob, civil_status, nationality, religion, purok, address, mobile, email, voter_status, precinct_number, philhealth_number, sss_gsis_number, tin_number, educational_attainment, employment_status, occupation, monthly_annual_income, pwd_status, solo_parent_status, relationship_household_head, head_of_the_family, type_of_dwelling, health_condition, vaccination_status, blood_type, beneficiary_program, emergency_contact_person, emergency_contact_relationship, emergency_contact_number) VALUES (:household_number, :fname, :mname, :lname, :suffix, :gender, :dob, :civil_status, :nationality, :religion, :purok, :address, :mobile, :email, :voter_status, :precinct_number, :philhealth_number, :sss_gsis_number, :tin_number, :educational_attainment, :employment_status, :occupation, :monthly_annual_income, :pwd_status, :solo_parent_status, :relationship_household_head, :head_of_the_family, :type_of_dwelling, :health_condition, :vaccination_status, :blood_type, :beneficiary_program, :emergency_contact_person, :emergency_contact_relationship, :emergency_contact_number)";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':household_number', $household_number);
         $stmt->bindParam(':fname', $fname);
         $stmt->bindParam(':mname', $mname);
         $stmt->bindParam(':lname', $lname);
@@ -37,24 +38,34 @@ class Resident {
         $stmt->bindParam(':civil_status', $civil_status);
         $stmt->bindParam(':nationality', $nationality);
         $stmt->bindParam(':religion', $religion);
+        $stmt->bindParam(':purok', $purok);
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':mobile', $mobile);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':house_number', $house_number);
-        $stmt->bindParam(':purok', $purok);
-        $stmt->bindParam(':brgy', $brgy);
-        $stmt->bindParam(':head_of_family', $head_of_family);
-        $stmt->bindParam(':household_composition', $household_composition);
-        $stmt->bindParam(':educational_attainment', $educational_attainment);
-        $stmt->bindParam(':occupation', $occupation);
-        $stmt->bindParam(':type_of_residency', $type_of_residency);
-        $stmt->bindParam(':blood_type', $blood_type);
-        $stmt->bindParam(':disabilities', $disabilities);
-        $stmt->bindParam(':beneficiary_status', $beneficiary_status);
-        $stmt->bindParam(':precinct_number', $precinct_number);
         $stmt->bindParam(':voter_status', $voter_status);
+        $stmt->bindParam(':precinct_number', $precinct_number);
+        $stmt->bindParam(':philhealth_number', $philhealth_number);
+        $stmt->bindParam(':sss_gsis_number', $sss_gsis_number);
+        $stmt->bindParam(':tin_number', $tin_number);
+        $stmt->bindParam(':educational_attainment', $educational_attainment);
+        $stmt->bindParam(':employment_status', $employment_status);
+        $stmt->bindParam(':occupation', $occupation);
+        $stmt->bindParam(':monthly_annual_income', $monthly_annual_income);
+        $stmt->bindParam(':pwd_status', $pwd_status);
+        $stmt->bindParam(':solo_parent_status', $solo_parent_status);
+        $stmt->bindParam(':relationship_household_head', $relationship_household_head);
+        $stmt->bindParam(':head_of_the_family', $head_of_the_family);
+        $stmt->bindParam(':type_of_dwelling', $type_of_dwelling);
+        $stmt->bindParam(':health_condition', $health_condition);
+        $stmt->bindParam(':vaccination_status', $vaccination_status);
+        $stmt->bindParam(':blood_type', $blood_type);
+        $stmt->bindParam(':beneficiary_program', $beneficiary_program);
         $stmt->bindParam(':emergency_contact_person', $emergency_contact_person);
         $stmt->bindParam(':emergency_contact_relationship', $emergency_contact_relationship);
         $stmt->bindParam(':emergency_contact_number', $emergency_contact_number);
+
+
+        
         //return $stmt->execute();
 
         if ($stmt->execute()) {
@@ -70,11 +81,12 @@ class Resident {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
-        //$query = "UPDATE tbl_resident SET name = :name, email = :email, age = :age WHERE id = :id";
-        $query = "UPDATE tbl_resident SET fname = :fname, mname = :mname, lname = :lname, suffix = :suffix, gender = :gender, dob = :dob, civil_status = :civil_status, nationality = :nationality, religion = :religion, mobile = :mobile, email = :email, house_number = :house_number, purok = :purok, brgy = :brgy, head_of_family = :head_of_family, household_composition = :household_composition, educational_attainment = :educational_attainment, occupation = :occupation, type_of_residency = :type_of_residency, blood_type = :blood_type, disabilities = :disabilities, beneficiary_status = :beneficiary_status, precinct_number = :precinct_number, voter_status = :voter_status, emergency_contact_person = :emergency_contact_person, emergency_contact_relationship = :emergency_contact_relationship, emergency_contact_number = :emergency_contact_number WHERE id = :id";
+    public function update($id, $household_number, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $purok, $address, $mobile, $email, $voter_status, $precinct_number, $philhealth_number, $sss_gsis_number, $tin_number, $educational_attainment, $employment_status, $occupation, $monthly_annual_income, $pwd_status, $solo_parent_status, $relationship_household_head, $head_of_the_family, $type_of_dwelling, $health_condition, $vaccination_status, $blood_type, $beneficiary_program, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
+        
+        $query = "UPDATE tbl_resident SET household_number = :household_number, fname = :fname, mname = :mname, lname = :lname, suffix = :suffix, gender = :gender, dob = :dob, civil_status = :civil_status, nationality = :nationality, religion = :religion, purok = :purok, address = :address, mobile = :mobile, email = :email, voter_status = :voter_status, precinct_number = :precinct_number, philhealth_number = :philhealth_number, sss_gsis_number = :sss_gsis_number, tin_number = :tin_number, educational_attainment = :educational_attainment, employment_status = :employment_status, occupation = :occupation, monthly_annual_income = :monthly_annual_income, pwd_status = :pwd_status, solo_parent_status = :solo_parent_status, relationship_household_head = :relationship_household_head, head_of_the_family = :head_of_the_family, type_of_dwelling = :type_of_dwelling, health_condition = :health_condition, vaccination_status = :vaccination_status, blood_type = :blood_type, beneficiary_program = :beneficiary_program, emergency_contact_person = :emergency_contact_person, emergency_contact_relationship = :emergency_contact_relationship, emergency_contact_number = :emergency_contact_number WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':household_number', $household_number);
         $stmt->bindParam(':fname', $fname);
         $stmt->bindParam(':mname', $mname);
         $stmt->bindParam(':lname', $lname);
@@ -84,21 +96,28 @@ class Resident {
         $stmt->bindParam(':civil_status', $civil_status);
         $stmt->bindParam(':nationality', $nationality);
         $stmt->bindParam(':religion', $religion);
+        $stmt->bindParam(':purok', $purok);
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':mobile', $mobile);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':house_number', $house_number);
-        $stmt->bindParam(':purok', $purok);
-        $stmt->bindParam(':brgy', $brgy);
-        $stmt->bindParam(':head_of_family', $head_of_family);
-        $stmt->bindParam(':household_composition', $household_composition);
-        $stmt->bindParam(':educational_attainment', $educational_attainment);
-        $stmt->bindParam(':occupation', $occupation);
-        $stmt->bindParam(':type_of_residency', $type_of_residency);
-        $stmt->bindParam(':blood_type', $blood_type);
-        $stmt->bindParam(':disabilities', $disabilities);
-        $stmt->bindParam(':beneficiary_status', $beneficiary_status);
-        $stmt->bindParam(':precinct_number', $precinct_number);
         $stmt->bindParam(':voter_status', $voter_status);
+        $stmt->bindParam(':precinct_number', $precinct_number);
+        $stmt->bindParam(':philhealth_number', $philhealth_number);
+        $stmt->bindParam(':sss_gsis_number', $sss_gsis_number);
+        $stmt->bindParam(':tin_number', $tin_number);
+        $stmt->bindParam(':educational_attainment', $educational_attainment);
+        $stmt->bindParam(':employment_status', $employment_status);
+        $stmt->bindParam(':occupation', $occupation);
+        $stmt->bindParam(':monthly_annual_income', $monthly_annual_income);
+        $stmt->bindParam(':pwd_status', $pwd_status);
+        $stmt->bindParam(':solo_parent_status', $solo_parent_status);
+        $stmt->bindParam(':relationship_household_head', $relationship_household_head);
+        $stmt->bindParam(':head_of_the_family', $head_of_the_family);
+        $stmt->bindParam(':type_of_dwelling', $type_of_dwelling);
+        $stmt->bindParam(':health_condition', $health_condition);
+        $stmt->bindParam(':vaccination_status', $vaccination_status);
+        $stmt->bindParam(':blood_type', $blood_type);
+        $stmt->bindParam(':beneficiary_program', $beneficiary_program);
         $stmt->bindParam(':emergency_contact_person', $emergency_contact_person);
         $stmt->bindParam(':emergency_contact_relationship', $emergency_contact_relationship);
         $stmt->bindParam(':emergency_contact_number', $emergency_contact_number);
@@ -119,6 +138,16 @@ class Resident {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC); // Use fetch() instead of fetchAll()
     }
+
+
+    public function householdMember($id, $household_number) {
+        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident WHERE id != :id AND household_number = :household_number";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':household_number', $household_number);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
     
 }
 ?>

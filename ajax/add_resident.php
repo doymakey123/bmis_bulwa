@@ -12,6 +12,7 @@ $userActivityLog = new Activitylog($db);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $household_number = htmlspecialchars(strip_tags($_POST['household_number']));
     $fname = ucfirst(htmlspecialchars(strip_tags($_POST['fname'])));
     $mname = ucfirst(htmlspecialchars(strip_tags($_POST['mname'])));
     $lname = ucfirst(htmlspecialchars(strip_tags($_POST['lname'])));
@@ -21,21 +22,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $civil_status = ucfirst(htmlspecialchars(strip_tags($_POST['civil_status'])));
     $nationality = ucfirst(htmlspecialchars(strip_tags($_POST['nationality'])));
     $religion = ucfirst(htmlspecialchars(strip_tags($_POST['religion'])));
+    $purok = htmlspecialchars(strip_tags($_POST['purok']));
+    $address = htmlspecialchars(strip_tags($_POST['address']));
     $mobile = htmlspecialchars(strip_tags($_POST['mobile']));
     $email = htmlspecialchars(strip_tags($_POST['email']));
-    $house_number = htmlspecialchars(strip_tags($_POST['house_number']));
-    $purok = ucfirst(htmlspecialchars(strip_tags($_POST['purok'])));
-    $brgy = ucfirst(htmlspecialchars(strip_tags($_POST['brgy'])));
-    $head_of_family = ucfirst(htmlspecialchars(strip_tags($_POST['head_of_family'])));
-    $household_composition = ucfirst(htmlspecialchars(strip_tags($_POST['household_composition'])));
-    $educational_attainment = ucfirst(htmlspecialchars(strip_tags($_POST['educational_attainment'])));
-    $occupation = ucfirst(htmlspecialchars(strip_tags($_POST['occupation'])));
-    $type_of_residency = ucfirst(htmlspecialchars(strip_tags($_POST['type_of_residency'])));
-    $blood_type = htmlspecialchars(strip_tags($_POST['blood_type']));
-    $disabilities = ucfirst(htmlspecialchars(strip_tags($_POST['disabilities'])));
-    $beneficiary_status = ucfirst(htmlspecialchars(strip_tags($_POST['beneficiary_status'])));
-    $precinct_number = htmlspecialchars(strip_tags($_POST['precinct_number']));
     $voter_status = htmlspecialchars(strip_tags($_POST['voter_status']));
+    $precinct_number = htmlspecialchars(strip_tags($_POST['precinct_number']));
+    $philhealth_number = htmlspecialchars(strip_tags($_POST['philhealth_number']));
+    $sss_gsis_number = htmlspecialchars(strip_tags($_POST['sss_gsis_number']));
+    $tin_number = htmlspecialchars(strip_tags($_POST['tin_number']));
+    $educational_attainment = htmlspecialchars(strip_tags($_POST['educational_attainment']));
+    $employment_status = htmlspecialchars(strip_tags($_POST['employment_status']));
+    $occupation = htmlspecialchars(strip_tags($_POST['occupation']));
+    $monthly_annual_income = htmlspecialchars(strip_tags($_POST['monthly_annual_income']));
+    $pwd_status = htmlspecialchars(strip_tags($_POST['pwd_status']));
+    $solo_parent_status = htmlspecialchars(strip_tags($_POST['solo_parent_status']));
+    $relationship_household_head = htmlspecialchars(strip_tags($_POST['relationship_household_head']));
+    $head_of_the_family = htmlspecialchars(strip_tags($_POST['head_of_the_family']));
+    $type_of_dwelling = htmlspecialchars(strip_tags($_POST['type_of_dwelling']));
+    $health_condition = htmlspecialchars(strip_tags($_POST['health_condition']));
+    $vaccination_status = htmlspecialchars(strip_tags($_POST['vaccination_status']));
+    $blood_type = htmlspecialchars(strip_tags($_POST['blood_type']));
+    $beneficiary_program = htmlspecialchars(strip_tags($_POST['beneficiary_program']));
     $emergency_contact_person = ucfirst(htmlspecialchars(strip_tags($_POST['emergency_contact_person'])));
     $emergency_contact_relationship = ucfirst(htmlspecialchars(strip_tags($_POST['emergency_contact_relationship'])));
     $emergency_contact_number = htmlspecialchars(strip_tags($_POST['emergency_contact_number']));
@@ -69,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
         // Add new resident
-        if ($resident->create($fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $mobile, $email, $house_number, $purok, $brgy, $head_of_family, $household_composition, $educational_attainment, $occupation, $type_of_residency, $blood_type, $disabilities, $beneficiary_status, $precinct_number, $voter_status, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number)) {
+        if ($resident->create($household_number, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $purok, $address, $mobile, $email, $voter_status, $precinct_number, $philhealth_number, $sss_gsis_number, $tin_number, $educational_attainment, $employment_status, $occupation, $monthly_annual_income, $pwd_status, $solo_parent_status, $relationship_household_head, $head_of_the_family, $type_of_dwelling, $health_condition, $vaccination_status, $blood_type, $beneficiary_program, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number)) {
             echo json_encode(['success' => true, 'message' => 'Resident added successfully']);
 
             // Validate session variables before logging activity

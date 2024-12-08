@@ -19,31 +19,17 @@ include("../includes/navbar.php");
         <!-- Modal Trigger -->
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#residentModal">Add Resident</button>
 
-        <!-- Filter Dropdown -->
-        <div>
-            <label for="filter-purok">Filter by Purok:</label>
-            <select id="filter-purok" name="purok">
-                <option value="">All</option>
-                <option value="1">Purok 1</option>
-                <option value="2">Purok 2</option>
-                <option value="3">Purok 3</option>
-                <option value="4">Purok 4</option>
-                <!-- Add more Puroks dynamically if needed -->
-            </select>
-        </div>
-
         <table class="table table-bordered" id="residentTable" style="width: 100%">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Suffix Name</th>
+                    <th>Seq. #</th>
+                    <th>Household #</th>
+                    <th>Full Name</th>
                     <th>Age</th>
                     <th>Birthday</th>
                     <th>Purok</th>
-                    <th>Occupation</th>
+                    <th>Voter Status</th>
+                    <th>Employment Status</th>
                     <th style="width:142px;">Actions</th>
                 </tr>
             </thead>
@@ -59,13 +45,31 @@ include("../includes/navbar.php");
         <div class="modal-content">
             <form id="addResidentForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="residentModalLabel">Add Resident</h5>
+                    <h5 class="modal-title" id="residentModalLabel">Add Resident - Personal Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="editId">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="household_number">Household Number</label>
+                                <input type="text" class="form-control" id="household_number" name="household_number" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            
+                        </div>
+                        <div class="col-md-3">
+                           
+                        </div>
+                        <div class="col-md-3">
+                            
+                        </div>
+                    </div>
                     
                     <div class="row">
                         <div class="col-md-3">
@@ -77,7 +81,7 @@ include("../includes/navbar.php");
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="mname">Middle Name</label>
-                                <input type="text" class="form-control" id="mname" name="mname" style="text-transform: capitalize;" required>
+                                <input type="text" class="form-control" id="mname" name="mname" style="text-transform: capitalize;">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -130,81 +134,198 @@ include("../includes/navbar.php");
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="religion">Religion</label>
                                 <input type="text" class="form-control" id="religion" name="religion" style="text-transform: capitalize;" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="purok">Purok</label>
+                                <select class="custom-select" id="purok" name="purok" required>
+                                    <option value="">Select Option</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="address">Current Address</label>
+                                <input type="text" class="form-control" id="address" name="address" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="mobile">Mobile Number</label>
                                 <input type="tel" class="form-control" id="mobile" name="mobile" maxlength="11" placeholder="09XXXXXXXXX" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
                             <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="sample@gmail.com" style="text-transform: lowercase;" required>
+                            <input type="email" class="form-control" id="email" name="email" autocomplete="off" placeholder="sample@gmail.com" style="text-transform: lowercase;" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="voter_status">Voter Status</label>
+                                <select class="custom-select" id="voter_status" name="voter_status" onchange="checkInputVoter(this)" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Registered">Registered</option>
+                                    <option value="Not Registered">Not Registered</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="div_precinct_number" style="display:none;">
+                            <label for="precinct_number">Precinct Number</label>
+                            <input type="text" class="form-control" id="precinct_number" name="precinct_number" >
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label for="philhealth_number">Philhealth Number</label>
+                            <input type="text" class="form-control" id="philhealth_number" name="philhealth_number" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="house_number">House Number/Bldg. Number</label>
-                                <input type="text" class="form-control" id="house_number" name="house_number" style="text-transform: capitalize;" required>
+                                <label for="sss_gsis_number">SSS/GSIS Number</label>
+                                <input type="text" class="form-control" id="sss_gsis_number" name="sss_gsis_number">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="purok">Block/Purok/Sitio/Street/Zone</label>
-                                <input type="text" class="form-control" id="purok" name="purok" style="text-transform: capitalize;" required>
+                                <label for="tin_number">TIN Number</label>
+                                <input type="text" class="form-control" id="tin_number" name="tin_number">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="brgy">Barangay Address</label>
-                                <input type="text" class="form-control" id="brgy" name="brgy" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="head_of_family">Head of Household</label>
-                                <input type="text" class="form-control" id="head_of_family" name="head_of_family" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="household_composition">Household Composition</label>
-                                <input type="text" class="form-control" id="household_composition" name="household_composition" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="occupation">Occupation/Source of Income</label>
-                                <input type="text" class="form-control" id="occupation" name="occupation" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="educational_attainment">Educational Attainment</label>
-                                <input type="text" class="form-control" id="educational_attainment" name="educational_attainment" style="text-transform: capitalize;" required>
+                                <select class="custom-select" id="educational_attainment" name="educational_attainment" required>
+                                    <option value="">Select Option</option>
+                                    <option value="No Formal Education">No Formal Education</option>
+                                    <option value="Elementary">Elementary</option>
+                                    <option value="High School">High School</option>
+                                    <option value="Vocational">Vocational</option>
+                                    <option value="College Level">College Level</option>
+                                    <option value="College Graduate">College Graduate</option>
+                                    <option value="Postgraduate">Postgraduate</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="type_of_residency">Type of Residency</label>
-                                <select class="custom-select" id="type_of_residency" name="type_of_residency" required>
+                                <label for="employment_status">Employment Status</label>
+                                <select class="custom-select" id="employment_status" name="employment_status" onchange="checkInputEmployment(this)" required>
                                     <option value="">Select Option</option>
-                                    <option value="Home Owner">Home Owner</option>
-                                    <option value="Renter">Renter</option>
-                                    <option value="Boarder">Boarder</option>
+                                    <option value="Employed">Employed</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                    <option value="Retired">Retired</option>
+                                    <option value="Student">Student</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group" id="div_occupation" style="display:none;">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" name="occupation" >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="monthly_annual_income">Monthly/Annual Income</label>
+                                <input type="text" class="form-control" id="monthly_annual_income" name="monthly_annual_income" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="pwd_status">PWD Status</label>
+                                <select class="custom-select" id="pwd_status" name="pwd_status" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label for="solo_parent_status">Solo Parent</label>
+                                <select class="custom-select" id="solo_parent_status" name="solo_parent_status" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                            <label for="relationship_household_head">Relationship to Household Head</label>
+                                <select class="custom-select" id="relationship_household_head" name="relationship_household_head" onchange="checkInputHeadFamily(this)" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Head">Head</option>
+                                    <option value="Spouse">Spouse</option>
+                                    <option value="Child">Child</option>
+                                    <option value="Parent">Parent</option>
+                                    <option value="Relative">Relative</option>
                                     <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="div_head_of_the_family" style="display:none;">
+                                <label for="head_of_the_family">Name Head Family</label>
+                                <input type="text" class="form-control" id="head_of_the_family" name="head_of_the_family" >
+                                <div id="search_results_head"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="type_of_dwelling">Type of Dwelling</label>
+                                <select class="custom-select" id="type_of_dwelling" name="type_of_dwelling" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Owned">Owned</option>
+                                    <option value="Rented">Rented</option>
+                                    <option value="Government Housing">Government Housing</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="health_condition">Health Condition(s)</label>
+                                <input type="text" class="form-control" id="health_condition" name="health_condition" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="vaccination_status">Vaccination Status</label>
+                                <select class="custom-select" id="vaccination_status" name="vaccination_status" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Fully Vaccinated">Fully Vaccinated</option>
+                                    <option value="Partially Vaccinated">Partially Vaccinated</option>
+                                    <option value="Not Vaccinated">Not Vaccinated</option>
                                 </select>
                             </div>
                         </div>
@@ -217,50 +338,31 @@ include("../includes/navbar.php");
                                     <option value="A-">A-</option>
                                     <option value="B+">B+</option>
                                     <option value="B-">B-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
                                     <option value="AB+">AB+</option>
                                     <option value="AB-">AB-</option>
-                                    <option value="N/A">N/A</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="disabilities">Disabilities (If any)</label>
-                                <input type="text" class="form-control" id="disabilities" name="disabilities" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- <div class="col-md-4">
-                        </div> -->
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="beneficiary_status">Beneficiary Status</label>
-                                <input type="text" class="form-control" id="beneficiary_status" name="beneficiary_status" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="precinct_number">Precinct Number</label>
-                                <input type="text" class="form-control" id="precinct_number" name="precinct_number" style="text-transform: capitalize;" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                        <div class="form-group">
-                                <label for="voter_status">Voter Status</label>
-                                <select class="custom-select" id="voter_status" name="voter_status" required>
+                                <label for="blood_type">Beneficiary Program</label>
+                                <select class="custom-select" id="beneficiary_program" name="beneficiary_program" required>
                                     <option value="">Select Option</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Not Active">Not Active</option>
-                                    <option value="N/A">N/A</option>
+                                    <option value="4Ps">4Ps</option>
+                                    <option value="Senior Citizen Pension">Senior Citizen Pension</option>
+                                    <option value="Scholarship">Scholarship</option>
+                                    <option value="Livelihood Assistance">Livelihood Assistance</option>
+                                    <option value="Calamity Assistance">Calamity Assistance</option>
+                                    <option value="PWD Assistance">PWD Assistance</option>
+                                    <option value="Solo Parent Assistance">Solo Parent Assistance</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                        </div> -->
                     </div>
+
                     <div class="modal-header">
                         </div>
                             <h5 class="modal-title" id="emergencyContactInformationModalLabel">Emergency Contact Information </h5>
@@ -276,7 +378,15 @@ include("../includes/navbar.php");
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="emergency_contact_relationship">Relationship</label>
-                                <input type="text" class="form-control" id="emergency_contact_relationship" name="emergency_contact_relationship" style="text-transform: capitalize;" required>
+                                <select class="custom-select" id="emergency_contact_relationship" name="emergency_contact_relationship" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Head">Head</option>
+                                    <option value="Spouse">Spouse</option>
+                                    <option value="Child">Child</option>
+                                    <option value="Parent">Parent</option>
+                                    <option value="Relative">Relative</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -297,6 +407,69 @@ include("../includes/navbar.php");
     </div>
 </div>
 
+
+<script>
+
+
+    function checkInputVoter(select) {
+        if (select.value === "Registered") {
+            document.getElementById("div_precinct_number").style.display = "inline";
+        } else {
+            document.getElementById("div_precinct_number").style.display = "none";
+        }
+    }
+
+    function checkInputEmployment(select) {
+        if (select.value === "Employed") {
+            document.getElementById("div_occupation").style.display = "inline";
+        } else {
+            document.getElementById("div_occupation").style.display = "none";
+        }
+    }
+
+
+    function checkInputHeadFamily(select) {
+        if (select.value === "Spouse" || select.value === "Child" || select.value === "Parent" || select.value === "Relative" || select.value === "Other") {
+            document.getElementById("div_head_of_the_family").style.display = "inline";
+        } else {
+            document.getElementById("div_head_of_the_family").style.display = "none";
+        }
+    }
+
+
+
+    $(document).ready(function() {
+        
+        $('#head_of_the_family').keyup(function() {
+            var head_of_the_family = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '../ajax/fetch_searchmodal.php',
+                data: {head_of_the_family: head_of_the_family},
+                success: function(data) {
+                    $('#search_results_head').html(data);
+                }
+            });
+
+        });
+
+    });
+
+    $(document).on('click', '#search_results_head span', function() {
+        var selectedValue = $(this).text();
+        
+        $('#head_of_the_family').val(selectedValue);
+        $('#search_results_head').html('');
+
+    });
+
+
+    
+
+
+
+
+</script>
 
 
 
