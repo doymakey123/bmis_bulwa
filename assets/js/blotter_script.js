@@ -3,13 +3,19 @@
 
 $(document).ready(function () {
     // Initialize DataTable
+    var counter = 0;
     const table = $('#blotterTable').DataTable({
         ajax: {
             url: '../ajax/fetch_blotter.php', // Backend URL to fetch data
             dataSrc: '',
         },
         columns: [
-            { data: 'id' },
+            { data: 
+                function(){
+                    counter++;
+                    return counter;
+                }
+            },
             { data: null,
                 render: function(data, type, row) {
                     return (row.complainant_fname ? row.complainant_fname + ' ' : '') + (row.complainant_mname ? row.complainant_mname + ' ' : '') + (row.complainant_lname ? row.complainant_lname + ' ' : '') + (row.complainant_suffix ? row.complainant_suffix : '')

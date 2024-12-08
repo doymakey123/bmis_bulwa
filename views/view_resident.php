@@ -346,6 +346,8 @@ $resident = $resident->individual($id);
                         <th>Voter Status</th>
                         <th>Employment Status</th>
                     </tr>
+                </thead>
+                <tbody>
                     <?php
                         foreach($household_members as $member){
                             $counter = 1;
@@ -363,8 +365,7 @@ $resident = $resident->individual($id);
                     <?php
                         }
                     ?>
-                </thead>
-                <tbody></tbody>
+                </tbody>
             </table>
 
 

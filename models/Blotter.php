@@ -6,22 +6,7 @@ class Blotter {
         $this->conn = $db;
     }
 
-    // Method to check if a blotter exists    //$date_created
-    // public function exists($complainant_fname, $complainant_mname, $complainant_lname, $complainant_suffix, $respondent_fname, $respondent_mname, $respondent_lname, $respondent_suffix) {
-    //     $query = "SELECT COUNT(*) FROM tbl_blotter WHERE complainant_fname = :complainant_fname AND complainant_mname = :complainant_mname AND complainant_lname = :complainant_lname AND complainant_suffix = :complainant_suffix AND respondent_fname = :respondent_fname AND respondent_mname = :respondent_mname AND respondent_lname = :respondent_lname AND respondent_suffix = :respondent_suffix";  //AND DATE_FORMAT(date_created, '%Y-%m-%d') = :date_created
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->bindParam(':complainant_fname', $complainant_fname);
-    //     $stmt->bindParam(':complainant_mname', $complainant_mname);
-    //     $stmt->bindParam(':complainant_lname', $complainant_lname);
-    //     $stmt->bindParam(':complainant_suffix', $complainant_suffix);
-    //     $stmt->bindParam(':respondent_fname', $respondent_fname);
-    //     $stmt->bindParam(':respondent_mname', $respondent_mname);
-    //     $stmt->bindParam(':respondent_lname', $respondent_lname);
-    //     $stmt->bindParam(':respondent_suffix', $respondent_suffix);
-    //     //$stmt->bindParam(':date_created', $date_created);
-    //     $stmt->execute();
-    //     return $stmt->fetchColumn() > 0; // Returns true if the blotter exists
-    // }
+   
 
     public function exists($complainant_fname, $complainant_mname, $complainant_lname, $complainant_suffix, $respondent_fname, $respondent_mname, $respondent_lname, $respondent_suffix, $date_created) {
         $query = "SELECT COUNT(*) FROM tbl_blotter WHERE complainant_fname = :complainant_fname AND complainant_mname = :complainant_mname AND complainant_lname = :complainant_lname AND complainant_suffix = :complainant_suffix AND respondent_fname = :respondent_fname AND respondent_mname = :respondent_mname AND respondent_lname = :respondent_lname AND respondent_suffix = :respondent_suffix AND DATE_FORMAT(date_created, '%Y-%m-%d') = :date_created";

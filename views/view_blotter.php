@@ -22,46 +22,85 @@ $blotter = $blotter->individual($id);
 
 
 
-<div class="row">
 
 
-    <div>
-        <h1>View Blotter</h1>
+    <div class="container-fluid">
+
+        <div class="row">   
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="complainant_fname">Complainant Name:</label>
+                        <input type="text" class="form-control" id="complainant_fname" name="complainant_fname" value="<?php echo htmlspecialchars($blotter['complainant_fname'] . ' ' . $blotter['complainant_mname'] . ' ' . $blotter['complainant_lname'] . ' ' . $blotter['complainant_suffix']);?>" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="fname">Complainant Address:</label>
+                        <input type="text" class="form-control" id="fname" name="fname" value="<?php echo htmlspecialchars($blotter['complainant_address']);?>" disabled>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="mname">Complainant Contact #:</label>
+                        <input type="text" class="form-control" id="mname" name="mname" value="<?php echo htmlspecialchars($blotter['complainant_contact']);?>" disabled>
+                    </div>
+                </div>
+        </div> 
+
+        <div class="row">   
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="respondent_fname">Respondent Name:</label>
+                        <input type="text" class="form-control" id="respondent_fname" name="respondent_fname" value="<?php echo htmlspecialchars($blotter['respondent_fname'] . ' ' . $blotter['respondent_mname'] . ' ' . $blotter['respondent_lname'] . ' ' . $blotter['respondent_suffix']);?>" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="respondent_contact">Respondent Contact #:</label>
+                        <input type="text" class="form-control" id="respondent_contact" name="respondent_contact" value="<?php echo htmlspecialchars($blotter['respondent_contact']);?>" disabled>
+                    </div>
+                </div>    
+        </div> 
+
+
+        <div class="row">   
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="blotter_type">Blotter Type:</label>
+                        <input type="text" class="form-control" id="blotter_type" name="blotter_type" value="<?php echo htmlspecialchars($blotter['blotter_type'] . ' ' . $blotter['respondent_mname'] . ' ' . $blotter['respondent_lname'] . ' ' . $blotter['respondent_suffix']);?>" disabled>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="details">Description/Report(s):</label>
+                        <!-- <input type="text" class="form-control" id="details" name="details" value="<?php echo htmlspecialchars($blotter['details']);?>" disabled> -->
+                        <textarea class="form-control" disabled> <?php echo htmlspecialchars($blotter['details']);?> </textarea>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="status">Status:</label>
+                        <input type="text" class="form-control" id="status" name="status" value="<?php echo htmlspecialchars($blotter['status']);?>" disabled>
+                    </div>
+                </div>    
+        </div>
+        
+
+
     </div>
 
 
-    <div>
-        <?php
-
-            // Check if data was fetched
-            if ($blotter) {
-                // Display the data in HTML
-                echo "<h1>Blotter Details</h1>";
-                echo htmlspecialchars($blotter['complainant_fname']); echo "<br>";
-                echo htmlspecialchars($blotter['complainant_mname']); echo "<br>";
-                echo htmlspecialchars($blotter['complainant_lname']); echo "<br>";
-                echo htmlspecialchars($blotter['complainant_suffix']); echo "<br>";
-                echo htmlspecialchars($blotter['complainant_address']); echo "<br>";
-                echo htmlspecialchars($blotter['complainant_contact']); echo "<br>";
-                echo htmlspecialchars($blotter['respondent_fname']); echo "<br>";
-                echo htmlspecialchars($blotter['respondent_mname']); echo "<br>";
-                echo htmlspecialchars($blotter['respondent_lname']); echo "<br>";
-                echo htmlspecialchars($blotter['respondent_suffix']); echo "<br>";
-                
-            } else {
-                echo "<p>No blotter found with the specified ID.</p>";
-            }
-
-        ?>
-    </div>
-
-</div>
     
 
 
 
 
+<script>
 
+    $('#header_name_exchangeable').text('Blotter Information'); // Change text description
+
+
+</script>
 
 <?php
 

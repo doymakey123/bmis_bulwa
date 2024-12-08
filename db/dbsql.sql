@@ -93,9 +93,30 @@ CREATE TABLE tbl_sk_official (
     mname VARCHAR(50),
     lname VARCHAR(50) NOT NULL,
     suffix VARCHAR(50),
+    position VARCHAR(15) NOT NULL,
     rank VARCHAR(50) NOT NULL,
+    assign_area VARCHAR(100) NOT NULL,
     committee  VARCHAR(100) NOT NULL,
     term VARCHAR(5) NOT NULL,
-    year_elected VARCHAR(100) NOT NULL
+    year_elected VARCHAR(100) NOT NULL,
+    status VARCHAR(15) NOT NULL,
+    date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP    
+);
+
+
+
+CREATE TABLE tbl_brgy_official (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fname VARCHAR(50) NOT NULL,
+    mname VARCHAR(50),
+    lname VARCHAR(50) NOT NULL,
+    suffix VARCHAR(50),
+    position VARCHAR(15) NOT NULL,
+    rank VARCHAR(50) NOT NULL,
+    assign_area VARCHAR(100) NOT NULL,
+    committee  VARCHAR(100) NOT NULL,
+    term VARCHAR(5) NOT NULL,
+    year_elected VARCHAR(100) NOT NULL,
+    status VARCHAR(15) NOT NULL,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP    
 );

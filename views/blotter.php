@@ -23,7 +23,7 @@ include("../includes/navbar.php");
         <table class="table table-bordered" id="blotterTable" style="width: 100%">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Seq. #</th>
                     <th>Complainant Name</th>
                     <th>Respondent Name</th>
                     <th>Blotter Type</th>
