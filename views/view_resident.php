@@ -381,11 +381,6 @@ $resident = $resident->individual($id);
     $('#header_name_exchangeable').text('Personal Resident Information'); // Change text description
 
 
-    // $(document).ready( function () {
-    //     $('#residentHouseholdMemberTable').DataTable();
-    // } );
-
-
 </script>
 
 

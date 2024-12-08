@@ -50,7 +50,7 @@ include("../includes/navbar.php");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="editIdBlotter">
+                    <input type="hidden" id="editIdBlotter">
 
                     <div class="row">
                         <div class="col-md-4"> </div>
@@ -98,7 +98,7 @@ include("../includes/navbar.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="complainant_contact">Mobile Number</label>
-                                <input type="text" class="form-control" id="complainant_contact" name="complainant_contact" style="text-transform: capitalize;" required>
+                                <input type="text" class="form-control" id="complainant_contact" name="complainant_contact" style="text-transform: capitalize;" maxlength="11" placeholder="09XXXXXXXXX" required>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@ include("../includes/navbar.php");
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="respondent_contact">Mobile Number</label>
-                                <input type="text" class="form-control" id="respondent_contact" name="respondent_contact" style="text-transform: capitalize;">
+                                <input type="text" class="form-control" id="respondent_contact" name="respondent_contact" maxlength="11" placeholder="09XXXXXXXXX" style="text-transform: capitalize;">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -194,7 +194,11 @@ include("../includes/navbar.php");
 
 
 
-<script src="../assets/js/blotter_script.js"></script>
+<script>
+
+    $('#header_name_exchangeable').text('Blotter Information'); // Change text description
+
+</script>
 <?php
 
 include("../includes/footer.php");

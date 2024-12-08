@@ -33,14 +33,14 @@ $(document).ready(function () {
                             onclick="window.open('view_blotter.php?id=' + ${(row.id)},'_blank')" >
                             View
                         </button>
-                        <button class="edit-btnblotter btn btn-warning btn-sm" 
+                        <button class="edit-btn-blotter btn btn-warning btn-sm"
                             data-id="${row.id}"
                             data-complainant_fname="${row.complainant_fname}" 
                             data-complainant_mname="${row.complainant_mname}" 
                             data-complainant_lname="${row.complainant_lname}" 
                             data-complainant_suffix="${row.complainant_suffix}"
-                            data-complainant_fname="${row.complainant_address}" 
-                            data-complainant_mname="${row.complainant_contact}" 
+                            data-complainant_address="${row.complainant_address}" 
+                            data-complainant_contact="${row.complainant_contact}" 
                             data-respondent_fname="${row.respondent_fname}" 
                             data-respondent_mname="${row.respondent_mname}" 
                             data-respondent_lname="${row.respondent_lname}" 
@@ -73,8 +73,8 @@ $(document).ready(function () {
     });
 
     // Open modal and populate fields for editing
-    $(document).on('click', '.edit-btnBlotter', function () {
-        const id = $(this).data(id);
+    $(document).on('click', '.edit-btn-blotter', function () {
+        const id = $(this).data('id');
         const complainant_fname = $(this).data('complainant_fname');
         const complainant_mname = $(this).data('complainant_mname');
         const complainant_lname = $(this).data('complainant_lname');
@@ -89,6 +89,7 @@ $(document).ready(function () {
         const blotter_type = $(this).data('blotter_type');
         const details = $(this).data('details');
         const status = $(this).data('status');
+
 
 
         // Populate modal fields
@@ -109,7 +110,7 @@ $(document).ready(function () {
         $('#status').val(status);
     
         // Change modal title and button text
-        $('#blotterModalLabel').text('Edit Resident');
+        $('#blotterModalLabel').text('Edit Blotter');
         $('#btn_addUpdateBlotter').text('Update');
     });
 
