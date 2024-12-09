@@ -14,7 +14,7 @@ include("../includes/navbar.php");
 
 include("../ajax/fetch_dashboard.php");
 // Call the function to get the count of residents aged 60 and up
-$total_60_and_up = $resident->countResidents60AndUp();
+// $total_60_and_up = $resident->countResidents60AndUp();
 
 
 
@@ -35,7 +35,10 @@ $total_60_and_up = $resident->countResidents60AndUp();
     <p>total female <?php echo $total_female; ?></p>
     </div>
     <div class="row">
-    <p>total male <?php echo $total_male; ?></p>
+    <p>total male <?php echo $total_male; ?></p> 
+    </div>
+    <div class="row">
+    <p>total resident(s) <?php echo $total_resident; ?></p> 
     </div>
 </div>
     

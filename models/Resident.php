@@ -185,6 +185,19 @@ class Resident {
         
         return $result['total_male'] ?? 0; // Return the count or 0 if no results
     }
+
+
+    // Function to count all residents
+    public function countAllResidents() {
+        // SQL query to count all residents
+        $sql = "SELECT COUNT(*) AS total_residents FROM tbl_resident";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        // Fetch the result
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total_residents'];
+    }
     
     
 }

@@ -11,7 +11,7 @@ $total_60_and_up = $resident->countResidents60AndUp();
 
 $total_female = $resident->countFemales();
 $total_male = $resident->countMales();
-
+$total_resident = $resident->countAllResidents();
 //echo json_encode($total_60_and_up);
 
 
