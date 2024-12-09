@@ -232,7 +232,7 @@ $brgyNotActive =  $brgyNotActive->fetchAllNotActive();
                                 <select class="custom-select" id="status" name="status" required>
                                     <option value="">Select Option</option>
                                     <option value="Active">Active</option>
-                                    <option value="Not active">Not Active</option>
+                                    <option value="Not Active">Not Active</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
