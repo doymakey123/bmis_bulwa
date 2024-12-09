@@ -14,6 +14,7 @@
                     <li class="nav-item"><a class="nav-link" href="sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="far fa-folder"></i><span>Activity Log</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_account.php"><i class="far fa-folder"></i><span>User Account</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

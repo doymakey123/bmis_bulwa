@@ -148,6 +148,44 @@ class Resident {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
+
+
+    // Function to count residents aged 60 and up
+    public function countResidents60AndUp() {
+        $sql = "SELECT COUNT(*) AS total_60_and_up 
+                FROM tbl_resident 
+                WHERE FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) >= 60";
+        
+        $stmt = $this->conn->prepare($sql); // Prepare the statement
+        $stmt->execute(); // Execute the statement
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
+        
+        return $result['total_60_and_up'] ?? 0; // Return the count or 0 if not found
+    }
+
+
+    public function countFemales() {
+        $sql = "SELECT COUNT(*) AS total_female FROM tbl_resident WHERE gender = 'Female'";
+        
+        $stmt = $this->conn->prepare($sql); // Prepare the query
+        $stmt->execute(); // Execute the query
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
+        
+        return $result['total_female'] ?? 0; // Return the count or 0 if no results
+    }
+
+
+    public function countMales() {
+        $sql = "SELECT COUNT(*) AS total_male FROM tbl_resident WHERE gender = 'Male'";
+        
+        $stmt = $this->conn->prepare($sql); // Prepare the query
+        $stmt->execute(); // Execute the query
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
+        
+        return $result['total_male'] ?? 0; // Return the count or 0 if no results
+    }
+    
     
 }
 ?>

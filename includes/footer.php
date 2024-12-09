@@ -22,4 +22,5 @@
     <script src="../assets/js/blotter_script.js"></script>
     <script src="../assets/js/sk_script.js"></script>
     <script src="../assets/js/brgy_script.js"></script>
+    <script src="../assets/js/user_script.js"></script>
 </body>
