@@ -48,6 +48,7 @@ CREATE TABLE tbl_resident (
     emergency_contact_person VARCHAR(150) NOT NULL,
     emergency_contact_relationship VARCHAR(50) NOT NULL,
     emergency_contact_number VARCHAR(11) NOT NULL,
+    image_path VARCHAR(255) DEFAULT NULL,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

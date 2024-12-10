@@ -74,12 +74,33 @@ class Resident {
         return ['success' => false, 'message' => 'Failed to create resident.'];
     }
 
-    public function fetchAll() {
-        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident;";
+    // public function fetchAll() {
+    //     $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident;";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+
+    public function fetchAll($purok = null) {
+        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, 
+                         FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365) AS age 
+                  FROM tbl_resident";
+    
+        if ($purok) {
+            $query .= " WHERE purok = :purok";
+        }
+    
         $stmt = $this->conn->prepare($query);
+    
+        if ($purok) {
+            $stmt->bindParam(':purok', $purok);
+        }
+    
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public function update($id, $household_number, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $purok, $address, $mobile, $email, $voter_status, $precinct_number, $philhealth_number, $sss_gsis_number, $tin_number, $educational_attainment, $employment_status, $occupation, $monthly_annual_income, $pwd_status, $solo_parent_status, $relationship_household_head, $head_of_the_family, $type_of_dwelling, $health_condition, $vaccination_status, $blood_type, $beneficiary_program, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
         

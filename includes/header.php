@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    
     <style>
         .dataTables_wrapper .dataTables_paginate {
             margin-top: 1rem;
@@ -25,6 +26,8 @@
         .dataTables_wrapper .dataTables_length {
             margin-bottom: 1rem;
         }
+
+       
     </style>
     
 </head>

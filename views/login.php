@@ -63,6 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit">Login</button>
         </form>
+        <div class="row">
+            <diiv class="col">
+                <a href="forgot_password_view.php" style="color: blue; text-decoration: none;">Forgot Password?</a>
+            </diiv>
+        </div>
     </div>
 </body>
 </html>

@@ -19,6 +19,32 @@ include("../includes/navbar.php");
         <!-- Modal Trigger -->
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#residentModal">Add Resident</button>
 
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="purokFilter">Purok Filter:</label>
+                    <select id="purokFilter" class="form-control">
+                        <option value="all">All</option>
+                        <option value="1">Purok 1</option>
+                        <option value="2">Purok 2</option>
+                        <option value="3">Purok 3</option>
+                        <option value="4">Purok 4</option>
+                        <option value="5">Purok 5</option>
+                        <option value="6">Purok 6</option>
+                        <option value="7">Purok 7</option>
+                        <option value="8">Purok 8</option>
+                        <option value="9">Purok 9</option>
+                        <option value="10">Purok 10</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- datatable ajax default -->
         <table class="table table-bordered" id="residentTable" style="width: 100%">
             <thead>
                 <tr>
@@ -464,6 +490,15 @@ include("../includes/navbar.php");
     });
 
 
+    $('#head_of_the_family').on('input', function() {
+    if ($(this).val().trim() === '') {
+        $('#search_results_head').html('').hide();  // Clear content and hide the div
+        console.log('Input is empty!');
+    } else {
+        $('#search_results_head').show();
+        console.log('Input is not empty!');
+    }
+});
     
 
 

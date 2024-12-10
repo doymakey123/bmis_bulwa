@@ -3,24 +3,118 @@
 
 $(document).ready(function () {
     // Initialize DataTable
+    // var counter = 0;
+    // const table = $('#residentTable').DataTable({
+        
+    //     ajax: {
+    //         url: '../ajax/fetch_resident.php', // Backend URL to fetch data
+    //         dataSrc: '',
+    //     },
+    //     columns: [
+    //         { data: 
+    //             function(){
+    //                 counter++;
+    //                 return counter;
+    //             }
+    //         },
+    //         { data: 'household_number' },
+    //         { data: null,
+    //             render: function(data, type, row) {
+    //                 return (row.fname ? row.fname + ' ' : '') + (row.mname ? row.mname + ' ' : '') + (row.lname ? row.lname + ' ' : '') + (row.suffix ? row.suffix : '')
+    //             }
+    //         },
+    //         { data: 'age' },
+    //         { data: 'formatted_birthday' },
+    //         { data: 'purok' },
+    //         { data: 'voter_status' },
+    //         { data: 'employment_status' },
+    //         {
+                
+    //             data: null,
+    //             render: function (data, type, row) {
+    //                 return `
+    //                     <button class="info-btn btn btn-primary btn-sm" 
+    //                         data-id="${row.id}"
+    //                         onclick="window.open('view_resident.php?id=' + ${(row.id)},'_blank')" >
+    //                         View
+    //                     </button>
+    //                     <button class="edit-btn btn btn-warning btn-sm" 
+    //                         data-id="${row.id}"
+    //                         data-household_number="${row.household_number}" 
+    //                         data-fname="${row.fname}" 
+    //                         data-mname="${row.mname}" 
+    //                         data-lname="${row.lname}" 
+    //                         data-suffix="${row.suffix}"
+    //                         data-gender="${row.gender}" 
+    //                         data-dob="${row.formatted_birthday}" 
+    //                         data-civil_status="${row.civil_status}" 
+    //                         data-nationality="${row.nationality}"
+    //                         data-religion="${row.religion}" 
+    //                         data-purok="${row.purok}" 
+    //                         data-address="${row.address}" 
+    //                         data-mobile="${row.mobile}" 
+    //                         data-email="${row.email}" 
+    //                         data-voter_status="${row.voter_status}" 
+    //                         data-precinct_number="${row.precinct_number}"
+    //                         data-philhealth_number="${row.philhealth_number}" 
+    //                         data-sss_gsis_number="${row.sss_gsis_number}" 
+    //                         data-tin_number="${row.tin_number}" 
+    //                         data-educational_attainment="${row.educational_attainment}"
+    //                         data-employment_status="${row.employment_status}" 
+    //                         data-occupation="${row.occupation}" 
+    //                         data-monthly_annual_income="${row.monthly_annual_income}" 
+    //                         data-pwd_status="${row.pwd_status}"
+    //                         data-solo_parent_status="${row.solo_parent_status}" 
+    //                         data-relationship_household_head="${row.relationship_household_head}" 
+    //                         data-head_of_the_family="${row.head_of_the_family}" 
+    //                         data-type_of_dwelling="${row.type_of_dwelling}"
+    //                          data-health_condition="${row.health_condition}" 
+    //                         data-vaccination_status="${row.vaccination_status}" 
+    //                         data-blood_type="${row.blood_type}" 
+    //                          data-beneficiary_program="${row.beneficiary_program}" 
+    //                         data-emergency_contact_person="${row.emergency_contact_person}" 
+    //                         data-emergency_contact_relationship="${row.emergency_contact_relationship}" 
+    //                         data-emergency_contact_number="${row.emergency_contact_number}"
+    //                         data-toggle="modal" 
+    //                         data-target="#residentModal">
+    //                         Edit
+    //                     </button>
+    //                     <button class="delete-btn btn btn-danger btn-sm" 
+    //                         data-id="${row.id}">
+    //                         Delete
+    //                     </button>
+    //                 `;
+    //             },
+    //         },
+    //     ],
+    //     dom: '<"row"<"col-sm-12 col-md-6"f><"col-sm-12 col-md-6 text-right"l>>' +
+    //          '<"row"<"col-sm-12"tr>>' +
+    //          '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+    //     language: {
+    //         search: "Search:",
+    //         lengthMenu: "Show _MENU_ entries",
+    //     },
+    //     pagingType: "full_numbers", // Better pagination styling
+    //     responsive: true, // Make it responsive
+    // });
+
     var counter = 0;
     const table = $('#residentTable').DataTable({
+        scrollX: true, // Enable horizontal scrolling
         ajax: {
             url: '../ajax/fetch_resident.php', // Backend URL to fetch data
+            data: function (d) {
+                d.purok = $('#purokFilter').val(); // Include purok filter in the request
+            },
             dataSrc: '',
         },
         columns: [
-            { data: 
-                function(){
-                    counter++;
-                    return counter;
-                }
-            },
+            { data: function () { counter++; return counter; } },
             { data: 'household_number' },
             { data: null,
-                render: function(data, type, row) {
-                    return (row.fname ? row.fname + ' ' : '') + (row.mname ? row.mname + ' ' : '') + (row.lname ? row.lname + ' ' : '') + (row.suffix ? row.suffix : '')
-                }
+                render: function (data, type, row) {
+                    return (row.fname || '') + ' ' + (row.mname || '') + ' ' + (row.lname || '') + ' ' + (row.suffix || '');
+                },
             },
             { data: 'age' },
             { data: 'formatted_birthday' },
@@ -28,7 +122,6 @@ $(document).ready(function () {
             { data: 'voter_status' },
             { data: 'employment_status' },
             {
-                
                 data: null,
                 render: function (data, type, row) {
                     return `
@@ -93,8 +186,14 @@ $(document).ready(function () {
             search: "Search:",
             lengthMenu: "Show _MENU_ entries",
         },
-        pagingType: "full_numbers", // Better pagination styling
-        responsive: true, // Make it responsive
+        pagingType: "full_numbers",
+        responsive: true,
+    });
+
+    // Re-fetch data when purok filter changes
+    $('#purokFilter').on('change', function () {
+        counter = 0; // Reset the counter for row numbering
+        table.ajax.reload();
     });
 
     // Open modal and populate fields for editing
@@ -285,5 +384,6 @@ $(document).ready(function () {
             });
         }
     });
+
 });
 

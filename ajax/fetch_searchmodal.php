@@ -14,7 +14,8 @@ if ($conn->connect_error) {
 
 if (isset($_POST['head_of_the_family'])) {
     $search = $_POST['head_of_the_family'];
-    $query = "SELECT * FROM tbl_resident WHERE fname LIKE '%$search%' || mname LIKE '%$search%' || lname LIKE '%$search%'";
+    //$query = "SELECT * FROM tbl_resident WHERE fname LIKE '%$search%' || mname LIKE '%$search%' || lname LIKE '%$search%' AND relationship_household_head = 'Head'";
+    $query = "SELECT * FROM tbl_resident WHERE (fname LIKE '%$search%' OR mname LIKE '%$search%' OR lname LIKE '%$search%') AND relationship_household_head = 'Head' LIMIT 10";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -25,4 +26,5 @@ if (isset($_POST['head_of_the_family'])) {
 
 $conn->close();
 
+//style="cursor:pointer;
 ?>
