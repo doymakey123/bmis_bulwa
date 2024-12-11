@@ -21,13 +21,33 @@ include("../includes/navbar.php");
 
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="employmentStatusFilter">Employment Status:</label>
+                    <select id="employmentStatusFilter" class="form-control">
+                        <option value="">All Employment Status</option>
+                        <option value="Employed">Employed</option>
+                        <option value="Unemployed">Unemployed</option>
+                        <option value="Retired">Retired</option>
+                        <option value="Student">Student</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="voterStatusFilter">Purok Filter:</label>
+                    <select id="voterStatusFilter" class="form-control">
+                        <option value="">All Voter Status</option>
+                        <option value="Registered">Registered</option>
+                        <option value="Unregistered">Unregistered</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="purokFilter">Purok Filter:</label>
                     <select id="purokFilter" class="form-control">
-                        <option value="all">All</option>
+                        <option value="">All</option>
                         <option value="1">Purok 1</option>
                         <option value="2">Purok 2</option>
                         <option value="3">Purok 3</option>
@@ -42,7 +62,6 @@ include("../includes/navbar.php");
                 </div>
             </div>
         </div>
-
 
         <!-- datatable ajax default -->
         <table class="table table-bordered" id="residentTable" style="width: 100%">

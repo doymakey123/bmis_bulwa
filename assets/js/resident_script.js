@@ -105,6 +105,8 @@ $(document).ready(function () {
             url: '../ajax/fetch_resident.php', // Backend URL to fetch data
             data: function (d) {
                 d.purok = $('#purokFilter').val(); // Include purok filter in the request
+                d.voter_status = $('#voterStatusFilter').val();
+                d.employment_status = $('#employmentStatusFilter').val();
             },
             dataSrc: '',
         },
@@ -191,8 +193,14 @@ $(document).ready(function () {
     });
 
     // Re-fetch data when purok filter changes
-    $('#purokFilter').on('change', function () {
-        counter = 0; // Reset the counter for row numbering
+    // $('#purokFilter').on('change', function () {
+    //     counter = 0; // Reset the counter for row numbering
+    //     table.ajax.reload();
+    // });
+
+     // Trigger table reload on filter change
+     $('#purokFilter, #voterStatusFilter, #employmentStatusFilter').on('change', function () {
+        counter = 0; // Reset counter for serial number
         table.ajax.reload();
     });
 

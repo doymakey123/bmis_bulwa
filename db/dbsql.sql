@@ -4,9 +4,10 @@ USE db_bmis_bulwa;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'user') NOT NULL
+    role ENUM('admin', 'user') NOT NULL,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -120,4 +121,14 @@ CREATE TABLE tbl_brgy_official (
     year_elected VARCHAR(100) NOT NULL,
     status VARCHAR(15) NOT NULL,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP    
+);
+
+
+CREATE TABLE password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    otp_code VARCHAR(10) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    is_used TINYINT(1) DEFAULT 0,
+    FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
 );

@@ -82,24 +82,56 @@ class Resident {
     // }
 
 
-    public function fetchAll($purok = null) {
-        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, 
-                         FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365) AS age 
-                  FROM tbl_resident";
+    // public function fetchAll($purok = null) {
+    //     $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, 
+    //                      FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365) AS age 
+    //               FROM tbl_resident";
     
-        if ($purok) {
-            $query .= " WHERE purok = :purok";
+    //     if ($purok) {
+    //         $query .= " WHERE purok = :purok";
+    //     }
+    
+    //     $stmt = $this->conn->prepare($query);
+    
+    //     if ($purok) {
+    //         $stmt->bindParam(':purok', $purok);
+    //     }
+    
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    public function fetchFiltered($purok, $voter_status, $employment_status) {
+        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday,
+                         FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age
+                  FROM tbl_resident WHERE 1";
+    
+        if (!empty($purok)) {
+            $query .= " AND purok = :purok";
+        }
+        if (!empty($voter_status)) {
+            $query .= " AND voter_status = :voter_status";
+        }
+        if (!empty($employment_status)) {
+            $query .= " AND employment_status = :employment_status";
         }
     
         $stmt = $this->conn->prepare($query);
     
-        if ($purok) {
+        if (!empty($purok)) {
             $stmt->bindParam(':purok', $purok);
+        }
+        if (!empty($voter_status)) {
+            $stmt->bindParam(':voter_status', $voter_status);
+        }
+        if (!empty($employment_status)) {
+            $stmt->bindParam(':employment_status', $employment_status);
         }
     
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     
 
     public function update($id, $household_number, $fname, $mname, $lname, $suffix, $gender, $dob, $civil_status, $nationality, $religion, $purok, $address, $mobile, $email, $voter_status, $precinct_number, $philhealth_number, $sss_gsis_number, $tin_number, $educational_attainment, $employment_status, $occupation, $monthly_annual_income, $pwd_status, $solo_parent_status, $relationship_household_head, $head_of_the_family, $type_of_dwelling, $health_condition, $vaccination_status, $blood_type, $beneficiary_program, $emergency_contact_person, $emergency_contact_relationship, $emergency_contact_number) {
