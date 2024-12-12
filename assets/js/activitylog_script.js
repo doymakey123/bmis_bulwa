@@ -4,6 +4,7 @@
 $(document).ready(function () {
     // Initialize DataTable
     const table = $('#activitylogTable').DataTable({
+        scrollX: true, // Enable horizontal scrolling
         ajax: {
             url: '../ajax/fetch_activitylog.php', // Backend URL to fetch data
             dataSrc: '',

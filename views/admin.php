@@ -29,7 +29,9 @@ include("../ajax/fetch_dashboard.php");
 
 <div class="container">
     <div class="row">
-    <p>total senior citizen(s) <?php echo $total_60_and_up; ?></p>
+    <a href="senior_citizen.php">
+        <p>total senior citizen(s) <?php echo $total_60_and_up; ?></p>
+    </a>
     </div>
     <div class="row">
     <p>total female <?php echo $total_female; ?></p>

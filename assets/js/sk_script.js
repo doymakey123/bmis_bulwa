@@ -5,6 +5,7 @@ $(document).ready(function () {
     // Initialize DataTable
     var counter = 0;
     const table = $('#skTable').DataTable({
+        scrollX: true, // Enable horizontal scrolling
         ajax: {
             url: '../ajax/fetch_sk_official.php', // Backend URL to fetch data
             dataSrc: '',

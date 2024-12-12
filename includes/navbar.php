@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="Dashboard.php">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="admin.php">
             <img class="logo2" style="min-width: 50px;max-height: 50px;" src="../assets/img/bulwalogo.png">
             <div class="sidebar-brand-text mx-3"><span>Brgy Bulwa</span></div>
                 </a>
@@ -13,7 +13,7 @@
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-folder"></i><span>Records</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="far fa-folder"></i><span>Activity Log</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="fa fa-history"></i><span>Activity Log</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="user_account.php"><i class="far fa-folder"></i><span>User Account</span></a></li>
                     
                 </ul>
@@ -28,7 +28,10 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">admin</span><img class="border rounded-circle img-profile" src="../assets/img/avatars/avatar5.png"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
+                                        <a class="dropdown-item" href="setting.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Setting</a>
+                                        <a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

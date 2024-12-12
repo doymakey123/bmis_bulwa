@@ -27,17 +27,47 @@ $resident = $resident->individual($id);
 
             <div class="row">
                 <div class="col-md-2">
+                    <!-- Current Image Display -->
+    <div class="form-group">
+        <label>Profile Picture:</label>
+        <div id="imagePreview" style="border: 1px solid #ccc; padding: 10px; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;">
+            <?php if (!empty($resident['image_path'])): ?>
+                <img src="../<?php echo htmlspecialchars($resident['image_path']); ?>" alt="Resident Image" style="max-width: 100%; max-height: 100%;">
+            <?php else: ?>
+                <p>No image available.</p>
+            <?php endif; ?>
+        </div>
+    </div>
                     
                 </div>
                 <div class="col-md-3">
                     
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     
                 </div>
-                <div class="col-md-3 text-right">
-                    <img src="../assets/img/brgyofficial.png" class="rounded" style="max-width:400px;" alt="...">
-                    <input type="file" name="file" id="file">
+                <div class="col-md-4 text-right">
+
+                    <!-- Image Preview (Optional) -->
+                    <div class="form-group">
+                        <!-- <label>Image Preview:</label> -->
+                        <div id="imagePreview" style="border: 1px solid #ccc; padding: 10px; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;">
+                            <img id="previewImg" src="" alt="Preview" style="max-width: 100%; max-height: 100%; display: none;">
+                        </div>
+                    </div>
+
+                    <form id="uploadImage" action="../ajax/add_image_resident.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($resident['id']);?>">
+                        
+                        <!-- Image Upload Section -->
+                        <div class="form-group">
+                            <label for="residentImage">Upload Resident Picture and display preview:</label>
+                            <input type="file" id="residentImage" name="residentImage" class="form-control" accept="image/*">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Upload Picture</button>
+                    </form>
                 </div>
             </div>  
             <br><br>
@@ -380,6 +410,24 @@ $resident = $resident->individual($id);
 <script>
 
     $('#header_name_exchangeable').text('Personal Resident Information'); // Change text description
+
+    document.getElementById('residentImage').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const previewImg = document.getElementById('previewImg');
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block'; // Show the image
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewImg.src = '';
+        previewImg.style.display = 'none'; // Hide the image if no file is selected
+    }
+});
+
 
 
 </script>

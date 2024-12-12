@@ -74,12 +74,12 @@ class Resident {
         return ['success' => false, 'message' => 'Failed to create resident.'];
     }
 
-    // public function fetchAll() {
-    //     $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident;";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
+    public function fetchAll() {
+        $query = "SELECT *, STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
     // public function fetchAll($purok = null) {
@@ -251,6 +251,15 @@ class Resident {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total_residents'];
     }
+
+
+    public function fetchAllSeniorCitizens() {
+        $query = "SELECT *,STR_TO_DATE(dob, '%m/%d/%Y') AS formatted_birthday, FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) AS age FROM tbl_resident WHERE FLOOR(DATEDIFF(CURDATE(), STR_TO_DATE(dob, '%m/%d/%Y')) / 365.25) >= 60";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     
     
 }

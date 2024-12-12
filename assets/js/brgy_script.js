@@ -5,6 +5,7 @@ $(document).ready(function () {
     // Initialize DataTable
     var counter = 0;
     const table = $('#brgyTable').DataTable({
+        scrollX: true, // Enable horizontal scrolling
         ajax: {
             url: '../ajax/fetch_brgy_official.php', // Backend URL to fetch data
             dataSrc: '',

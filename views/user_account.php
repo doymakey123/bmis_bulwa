@@ -91,7 +91,7 @@ include("../includes/navbar.php");
                         <div class="col">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="showpassword">
-                                <label class="custom-control-label" for="showpassword">Show Passowrd</label>
+                                <label class="custom-control-label" for="showpassword">Show Password</label>
                             </div>
                         </div>
                     </div>

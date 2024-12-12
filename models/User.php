@@ -22,7 +22,7 @@ class User {
 
 
     public function fetchAll() {
-        $query = "SELECT * FROM users;";
+        $query = "SELECT * FROM users WHERE role != 'admin'";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  

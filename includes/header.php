@@ -27,6 +27,10 @@
             margin-bottom: 1rem;
         }
 
+        #seniorTable_filter {
+            text-align: right !important;
+        }
+
        
     </style>
     

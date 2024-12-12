@@ -5,6 +5,7 @@ $(document).ready(function () {
     // Initialize DataTable
     var counter = 0;
     const table = $('#blotterTable').DataTable({
+        scrollX: true, // Enable horizontal scrolling
         ajax: {
             url: '../ajax/fetch_blotter.php', // Backend URL to fetch data
             dataSrc: '',
