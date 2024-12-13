@@ -259,6 +259,17 @@ class Resident {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+
+    public function fetchHouseholdNumber() {
+        $query = "SELECT *, COUNT(household_number) As total_number FROM tbl_resident WHERE relationship_household_head = 'Head' GROUP BY fname, mname, lname, suffix ORDER BY household_number;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':household_number', $household_number);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
     
     
     

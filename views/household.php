@@ -33,9 +33,8 @@ $brgyNotActive =  $brgyNotActive->fetchAllNotActive();
             <thead>
                 <tr>
                     <th>Seq. #</th>
-                    <th>Total Household</th>
                     <th>Household #</th>
-                    <th>Household Member</th>
+                    <th>Head of the Family</th>
                     <th style="width:142px;">Actions</th>
                 </tr>
             </thead>

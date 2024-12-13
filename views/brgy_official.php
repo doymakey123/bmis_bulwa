@@ -257,7 +257,7 @@ $brgyNotActive =  $brgyNotActive->fetchAllNotActive();
     $('#header_name_exchangeable').text('Barangay Official Information'); // Change text description
 
     $(document).ready( function () {
-        $('#notActiveSkTable').DataTable({
+        $('#notActiveBrgyTable').DataTable({
             dom: '<"row"<"col-sm-12 col-md-6"f><"col-sm-12 col-md-6 text-right"l>>' +
              '<"row"<"col-sm-12"tr>>' +
              '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
