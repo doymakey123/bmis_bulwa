@@ -44,4 +44,6 @@
     <script src="../assets/js/brgy_script.js"></script>
     <script src="../assets/js/user_script.js"></script>
     <script src="../assets/js/senior_script.js"></script>
+    <!-- <script src="../assets/js/chart_population_script.js"></script> -->
 </body>
+
