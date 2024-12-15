@@ -6,16 +6,14 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="admin.php"><i class="far fa-chart-bar"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="resident.php"><i class="fas fa-user"></i><span>Resident Information</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="certificate.php"><i class="far fa-file-alt"></i><span>Certificate</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="clearance.php"><i class="far fa-file-alt"></i><span>Barangay Clearance</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="blotter.php"><i class="far fa-folder"></i><span>Blotter Record</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-folder"></i><span>Records</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="fa fa-history"></i><span>Activity Log</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="user_account.php"><i class="far fa-folder"></i><span>User Account</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user.php"><i class="far fa-chart-bar"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_resident.php"><i class="fas fa-user"></i><span>Resident Information</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_certificate.php"><i class="far fa-file-alt"></i><span>Certificate</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_clearance.php"><i class="far fa-file-alt"></i><span>Barangay Clearance</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_blotter.php"><i class="far fa-folder"></i><span>Blotter Record</span></a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="user_sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
                     
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -30,7 +28,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small"><?php if ($_SESSION['role'] === 'user') {echo 'user'; }  if ($_SESSION['role'] === 'admin') {echo 'admin'; } ?></span><img class="border rounded-circle img-profile" src="../assets/img/avatars/avatar5.png"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
-                                        <a class="dropdown-item" href="setting.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Setting</a>
+                                        <a class="dropdown-item" href="user_setting.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Setting</a>
                                         <a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>

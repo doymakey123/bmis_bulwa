@@ -1,17 +1,12 @@
 <?php
 session_start();
-// if ($_SESSION['role'] !== 'admin') {
+// if ($_SESSION['role'] !== 'user') {
 //     header('Location: login.php');
 //     exit;
 // }
 
 include("../includes/header.php");
-if ($_SESSION['role'] !== 'admin') {
-    include("../includes/navuser.php");
-}else{
-    include("../includes/navbar.php");
-}
-
+include("../includes/navuser.php");
 include("../ajax/individual_resident.php");
 include("../ajax/fetch_household_member.php");
 
@@ -22,6 +17,8 @@ $id = filter_input(INPUT_GET,'id', FILTER_SANITIZE_NUMBER_INT);
 
 // Call the individual method
 $resident = $resident->individual($id);
+
+echo '<script> var userRole = "' . ($_SESSION['role'] ?? '') . '" </script>';
 
 ?>
 
