@@ -1,5 +1,3 @@
-
-
 <?php
 require '../includes/db.php';
 require '../models/ForgotPassword.php';
@@ -20,13 +18,18 @@ $forgotPassword = new ForgotPassword($pdo);
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_SESSION['email'];
-    $password = $_POST['password'];
-    $message = $forgotPassword->resetPassword($email, $password);
+    if (isset($_POST['otp'])) {
+        $otp = filter_var($_POST['otp'], FILTER_SANITIZE_NUMBER_INT);
+        $otpVerification = $forgotPassword->verifyOTP($email, $otp);
 
-    if ($message === "Password reset successfully.") {
-        unset($_SESSION['email']);
-        header('Location: login.php'); // Redirect to login
-        exit();
+        if ($otpVerification === true) {
+            header('Location: reset_password.php'); // Redirect to reset password page
+            exit();
+        } else {
+            $message = $otpVerification;
+        }
+    } elseif (isset($_POST['resend'])) {
+        $message = $forgotPassword->resendOTP($email);
     }
 }
 ?>
@@ -42,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Reset Password</title>
+    <title>Verify OTP</title>
     <link rel="icon" href="../assets/img/bulwalogo.png" type="image/x-icon">
   </head>
   <body>
@@ -68,13 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php } ?>
                 <form action="" method="POST">
                     <div class="form-group">
-                        <label for="password">Enter New Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
-                        <small>Password must include letters, numbers, and special characters.</small>
+                        <label for="otp">Enter OTP:</label>
+                        <input type="number" class="form-control" name="otp" id="otp" required>
                     </div>
-                    <button type="submit" class="btn btn-primary float-md-right">Reset Password</button>
+                    <button type="submit" class="btn btn-primary float-md-right">Verify OTP</button>
                 </form>
-
+                <form action="" method="POST">
+                    <button type="submit" class="btn btn-primary float-md-left" name="resend">Resend OTP</button>
+                </form>
             </div>
             <div class="col-md-4"></div>
         </div>
