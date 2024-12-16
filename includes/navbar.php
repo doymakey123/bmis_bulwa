@@ -8,14 +8,13 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="admin.php"><i class="far fa-chart-bar"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="resident.php"><i class="fas fa-user"></i><span>Resident Information</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="certificate.php"><i class="far fa-file-alt"></i><span>Certificate</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="certificate.php"><i class="fa fa-certificate" aria-hidden="true"></i><span>Certificate</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="clearance.php"><i class="far fa-file-alt"></i><span>Barangay Clearance</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="blotter.php"><i class="far fa-folder"></i><span>Blotter Record</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-folder"></i><span>Records</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="blotter.php"><i class="fa fa-file" aria-hidden="true"></i><span>Blotter Record</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="activitylog.php"><i class="fa fa-history"></i><span>Activity Log</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="user_account.php"><i class="far fa-folder"></i><span>User Account</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_account.php"><i class="fa fa-users" aria-hidden="true"></i><span>User Account</span></a></li>
                     
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

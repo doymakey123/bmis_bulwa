@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="admin.php">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="user.php">
             <img class="logo2" style="min-width: 50px;max-height: 50px;" src="../assets/img/bulwalogo.png">
             <div class="sidebar-brand-text mx-3"><span>Brgy Bulwa</span></div>
                 </a>
@@ -8,10 +8,9 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="user.php"><i class="far fa-chart-bar"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="user_resident.php"><i class="fas fa-user"></i><span>Resident Information</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="user_certificate.php"><i class="far fa-file-alt"></i><span>Certificate</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_certificate.php"><i class="fa fa-certificate" aria-hidden="true"></i><span>Certificate</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="user_clearance.php"><i class="far fa-file-alt"></i><span>Barangay Clearance</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="user_blotter.php"><i class="far fa-folder"></i><span>Blotter Record</span></a></li>
-                    
+                    <li class="nav-item"><a class="nav-link" href="user_blotter.php"><i class="fa fa-file" aria-hidden="true"></i><span>Blotter Record</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="user_sk_official.php"><i class="far fa-folder"></i><span>SK Official</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="user_brgy_official.php"><i class="far fa-folder"></i><span>Brgy Officials</span></a></li>
                     

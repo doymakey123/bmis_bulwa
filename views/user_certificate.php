@@ -154,6 +154,10 @@ if ($residents === false || empty($residents)) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+
+    $('#header_name_exchangeable').text('Barangay Certificate'); // Change text description
+
+
     $(document).ready(function() {
         $('#residentTable').DataTable({
             "searching": false  
